@@ -199,8 +199,3 @@ kube-scheduler-master2   1/1     Running   0          3h10m
 kube-scheduler-master3   1/1     Running   0          3h7m
 
 ```
-
-> **Etcd**
-
-Regarder son manifest,  identifier les informations de connexions: les certificats !
-Ils seront utilisés pour le backup & restore

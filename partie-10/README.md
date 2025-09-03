@@ -1,3 +1,5 @@
-# Upgrade Cluster
+# Operate a kubeadm cluster
 
-## backup & restore
+## Upgrade Cluster
+
+## Etcd Backup & Restore

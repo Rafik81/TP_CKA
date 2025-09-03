@@ -1,3 +1,0 @@
-# Install Cluster
-
-# Cluster Components
