@@ -5,7 +5,7 @@ Utiliser le contexte : `kubectl config use-context kind-k8s-c1-h`
 
 > **Consignes**
 
-- Lister les noms de toutes ressources kubernetes `namespeced` (comme pod, secret, configmap) dans le `/opt/cka/16/resources.txt` 
+- Lister les noms de toutes ressources kubernetes `namespaced` (comme pod, secret, configmap) dans le `/opt/cka/16/resources.txt` 
 
 
 
