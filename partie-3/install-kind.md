@@ -29,6 +29,18 @@ nodes:
   - role: worker
 EOF
 
+cat > kind-no-cni.yaml <<EOF
+kind: Cluster
+apiVersion: kind.x-k8s.io/v1alpha4
+nodes:
+  - role: control-plane
+  - role: worker
+  - role: worker
+networking:
+  disableDefaultCNI: true
+  podSubnet: 192.168.0.0/16
+EOF
+
 cat > k8s-c2-ac.yaml <<EOF
 kind: Cluster
 apiVersion: kind.x-k8s.io/v1alpha4
@@ -37,6 +49,7 @@ nodes:
   - role: worker
 EOF
 
+kind create cluster -n k8s-no-cni --config kind-no-cni.yaml
 kind create cluster -n k8s-c2-ac --config k8s-c2-ac.yaml
 kind create cluster -n k8s-c3-ccc
 kind create cluster -n k8s-c1-h --config kindconf.yaml

@@ -1,3 +1,14 @@
+# Worloads - Scheduing
+
+
+Sur la machine/VM Kind, exécuter le fichier script `prepare.sh` avec le **user normal** en avec copy-paste ou comme suit:
+
+```shell
+rm -f prepare.sh
+https://gitlab.enoks.fr/pub/tp-cka/-/raw/master/partie-4-5/prepare.sh
+
+bash prepare.sh
+```
 
 
 ## 1. Schedule/Planifier un Pod sur un node Control Plane(Master)
