@@ -1,4 +1,4 @@
-# Setup Cluster
+# Installation Cluster
 
 ## Setup des futurs nodes du cluster
 
@@ -154,6 +154,17 @@ cilium status --wait
 k -n  kube-system get no,po
 ```
 
+## Installer Metrics-Server
+
+```shell
+kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
+
+# une fois les pods OK
+k top node
+
+# HA
+## kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/high-availability-1.21+.yaml
+```
 
 ## Exploration de composants
 

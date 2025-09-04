@@ -1,4 +1,6 @@
-## Contexts
+
+
+## 1. Contexts
 
 Vous avez accès à **plusieurs clusters** depuis votre terminal principal via les contextes kubectl. 
 
@@ -10,7 +12,7 @@ Vous avez accès à **plusieurs clusters** depuis votre terminal principal via l
 - Enfin, écrivez une deuxième commande faisant la même chose dans `/opt/cka/context_default_no_kubectl.sh`, mais sans utiliser kubectl.
 
 
-## Collecter les information du Master
+## 2. Collecter les information du Master
 
 > **Consignes**
 
@@ -33,13 +35,13 @@ dns: [TYPE] [NAME]
 Les valeurs possibles de `[TYPE`] sont: not-installed, process, static-pod, pod
 
 
-## Trouver les informations d'un cluster
+## 3. Trouver les informations d'un cluster
 
-- Utiliser ce contexte pour l'exercice: `kubectl cluster-info --context kind-k8s-c1-h`
+- Utiliser ce contexte pour l'exercice: `kubectl config use-context kind-k8s-c1-h`
 
 > **Consignes**
 
-Trouvez les informations suivantes concernant le cluster `k8s-c1-h` :
+Trouvez les informations suivantes concernant le cluster `kind-k8s-c1-h` :
 
 
 1. Combien de nœuds maîtres sont disponibles ?
@@ -60,10 +62,10 @@ Pour vous connecter à node de ce cluster utiliser `sudo dssh <node>`
 5 : [RÉPONSE]
 
 
-## Créer un pod statique & service
+## 4. Créer un pod statique & service
 
 
-- Utiliser ce contexte pour l'exercice: `kubectl cluster-info --context kind-k8s-c3-ccc`
+- Utiliser ce contexte pour l'exercice: `kubectl config use-context kind-k8s-c3-ccc`
 
 > **Consignes**
 
@@ -74,9 +76,9 @@ Pour vous connecter à node de ce cluster utiliser `sudo dssh <node>`
   - Connectez-vous au node pour vérifier que le port 80 répond bien
 
 
-## Kubelet client/server cert info
+## 5. Kubelet client/server cert info
 
-- Utiliser ce contexte pour l'exercice: `kubectl cluster-info --context kind-k8s-c2-ac`
+- Utiliser ce contexte pour l'exercice: `kubectl use-context kind-k8s-c2-ac`
 
 > **Consignes**
 
@@ -86,3 +88,19 @@ Trouver la valeur du  `Issuer` et `Key Usage"` sur ce node pour:
 
 1. `kubelet client certificate`, celui utilisé pour les connexions sortantes vers le serveur kube-apiserver.
 2. `kubelet server certificate`, celui utilisé pour les connexions entrantes provenant du serveur kube-apiserver.
+
+## 6. Validité des certificats
+
+Utiliser le contexte/cluster **kubeadm** `kubeadm-cluster-formation`
+
+
+> **Consignes**
+
+Connecter-vous au node Master `master-1`
+
+- Vérifier la durée de validité du certificat du serveur `kube-apiserver`. Utilisez `openssl` ou `cfssl`. Notez la date d'expiration dans `/opt/cka/expiration` de la machien centrale
+
+- Utiliser la commande `kubeadm` pour également lister la durée et confirmez que les deux méthodes retournent le même resulat
+
+- Ecrire dans `/opt/cka/kubeadm-renew-certs.sh` la commande pour renouveller le certificat de `kube-apiserver` . Ne pas renouveller le certificat
+
