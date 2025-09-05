@@ -1,5 +1,10 @@
 # Security: RBAC - SecurityContext - NetworkPolicy
 
+- Security Main Page    : [https://kubernetes.io/docs/concepts/security/](https://kubernetes.io/docs/concepts/security/)
+  
+- Pod Security Standard : [https://kubernetes.io/docs/concepts/security/pod-security-standards/](https://kubernetes.io/docs/concepts/security/pod-security-standards/)
+
+- NetworkPolicy         : [https://kubernetes.io/docs/concepts/services-networking/network-policies/](https://kubernetes.io/docs/concepts/services-networking/network-policies/)
 
 ## 1. RBAC - SA - Role - RoleBinding 
 
@@ -180,3 +185,16 @@ Pour des questions de sécurité, créer un **NetworkPolicy** nommé `np-backend
 
 
 Une fois appliquée, les requetes vers  `vault`sur le port 8080 ne devraient plus fonctionner
+
+
+On va autoriser un namepsace entier
+
+- Créer les namespaces `curl-allow` et `curl-deny`
+- Créer le pod `pod-allow` et `pod-deny` respectivement dans `curl-allow` et `curl-deny`
+  - Utiliser `kubectl -n <namespace> run <nom> --image=curlimages/curl -- sleep 1d`
+
+Vérifier que ces deux pods peuvent joindre le pod `vault`sur le port 8080. EN fait tous les pods peuvent le joindre !  on va donc limiter cela
+
+- Dans le namepsace `project-snake` créer **NetworkPolicy** nommé `allow-ns-curl-allow` qui autorise uniquement tout le trafic venant du namespace `curl-allow` à joindre le pod `vault`sur le port 8080.
+
+- Vérifier que le pod `pod-allow`  a toujours accès et pas le `pod-deny`
