@@ -7,3 +7,5 @@
 ## Pod Security Standard
 
 ## NetworkPolicy
+
+## LimitRange - Quota

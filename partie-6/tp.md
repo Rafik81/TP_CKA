@@ -120,3 +120,18 @@ Utiliser le contexte: `kubectl config use-context  kind-k8s-no-cni`
 - Créer un **ingress** nommé `public-app-ing` avec pour **host** `public-app.cka`, `class nginx` pour exposer l'application
 
 Depuis l'un des node, vérifier que ca fonctionne avec `curl -H 'Host: public-app.cka' http://<IP-INGRESS-CREE>` 
+
+
+## 9. DNS -Service
+
+Utiliser le contexte: `kubectl config use-context  kind-k8s-no-cni`
+
+- Créer et utiliser le namespace `dns-test`
+- Créer le pod `dns-web-app` avec `nginx:1.29-alpine`
+
+- Exposer le pod `dns-web-app` avec un service clusertIP `dns-web-svc`, port 80
+  
+- Lancer un pod `dns-wget`avec l'image `busybox:1.36`, il doit rester en running
+- Vérifier que le pod `dns-wget` arrive bien à joindre le service
+  - `wget -qO- http://dns-web-svc`
+  - `wget -qO- http://dns-web-svc.dns-test.svc.cluster.local`

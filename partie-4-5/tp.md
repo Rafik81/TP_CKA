@@ -202,3 +202,19 @@ Ensuite:
 
 - Créer un **HorizontalPodAutoscaler** `deploy-rollout-scale` pour le deployment avec pour valeur min=1 max=3 lorsque le pourcentage du cpu atteint `95`
   
+
+## 13. Rolling Update
+
+Utiliser le contexte `kubectl config use-context kind-k8s-c2-ac`
+
+> **Consignes** 
+
+Dans le namespace `cka-rolling` créer le deployement `rolling-app` avec **4 replicas** en utilisant  `nginx:1.29-alpine`
+
+- Quelle est le type de la strategie de mise à jour de ce deployement ? Quelle est la valeur de `max Surge` ? Ecrire les réponses dans `/opt/cka/strategie.txt`
+
+- Mettre à jour le deployment pour passer `max surge` à **1** et `max unvailable` à **1**
+
+
+- Mettre à jour(update) le deployement avec `nginx:1.29.1-alpine` en utilisant `kubectl set`
+  - Ecrire dans `/opt/cka/roll-kubectl-set.txt`  la command eutilisée

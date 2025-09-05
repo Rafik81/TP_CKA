@@ -198,3 +198,31 @@ Vérifier que ces deux pods peuvent joindre le pod `vault`sur le port 8080. EN f
 - Dans le namepsace `project-snake` créer **NetworkPolicy** nommé `allow-ns-curl-allow` qui autorise uniquement tout le trafic venant du namespace `curl-allow` à joindre le pod `vault`sur le port 8080.
 
 - Vérifier que le pod `pod-allow`  a toujours accès et pas le `pod-deny`
+
+
+## LimitRange - Quota
+
+Utiliser le contexte `kubectl config use-context kind-k8s-c3-ccc`
+
+> **Consignes**
+
+Dans le namespace `quota-limits`:
+
+- Créer une **LimitRange** `resource-limits` avec:
+  - Default request: CPU: `10m`, Memory: `8Mi`
+  - Default limit: CPU: `20m`, Memory: `128Mi`
+  - Max limit: CPU: `50m`, Memory: `256Mi`
+  
+. Créer une ResourceQuota `compute-quota`avec:
+   - Max total CPU: `2`
+   - Max total memory: `1Gi`
+   - Max number of pods: `2`
+  
+- Créer un deployement `test-quota-limit` avec `nginx:1.29-alpine` et **3 replicas**
+
+Vérifier que les limites s'appliquent bien et le quota aussi
+
+stcoker les events du namespace après avoir appliquer une `grep compute-quota` dans `/opt/cka/test-quota.log`
+
+
+
