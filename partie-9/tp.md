@@ -230,7 +230,7 @@ Utiliser le contexte `kubectl config use-context kind-k8s-c2-ac`
 > **Setup**
 
 
-- **Connectez-vous au node Master**, télécharger et exécuter ce script - **ne pas regarder le contenu**
+- **Connectez-vous au node Master** avec `dssh`, télécharger et exécuter ce script - **ne pas regarder le contenu**
 
 ```shell
 rm -f set-4.sh
@@ -241,5 +241,21 @@ bash set-4.sh
 exit
 ```
 
+> **Consignes**
+
+- Créer le pod `another-deb-pod` avec `kubectl create deploy another-deb-pod --image nginx:1.29-alpine --replicas=1`
+- Aucun pod du du deployment ne tourne, UP-TO-DATE=0  et READY 0/1
+- Sans supprimer ni modifier le dpeloyment, fixer le problème afin qu'il puisse avoir un pod en Running
+
+
+## 14. Cronjob Issue
+
+Utiliser le contexte `kubectl config use-context  kind-k8s-no-cni`
 
 > **Consignes**
+
+Dans le namespace `kubectl create ns failed-cron-job`,  se trouve un CronJob `cka-failed-cronjob` censé s'exécuter chaque **2 minutes** pour vérifier que le pod `cka-cron-pod` exposé (en théorie) via le service `cka-cron-svc` est bien UP
+
+Les pods associés au jobs de ce cronjob sont en **erreur**
+
+Fixez le problème afin que le pod du job puisse être Completed

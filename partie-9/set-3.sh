@@ -4,7 +4,7 @@
 
 kubectl config use-context  kind-k8s-no-cni
 
-kubectl create ns failed-deploy
+kubectl create ns failed-deploy || true
 
 cat <<EOF | kubectl apply -f -
 apiVersion: v1
@@ -65,34 +65,10 @@ spec:
         name: nginx-config
 EOF
 
-## 6. POd Issue
-
-kubectl create ns failed-nginx-pod
-kubectl -n failed-nginx-pod run nginx-pod2 --image=nginx:ltest
-
-
-
-cat <<EOF | kubectl apply -f -
-apiVersion: v1
-kind: Pod
-metadata:
-  name: deploy-httpd
-spec:
-  containers:
-    - name: redis-container
-      image: nginx:1.29-alpine
-      resources:
-        requests:
-          memory: "128Mi"
-          cpu: "150m"
-        limits:
-          memory: "16Mi"
-          cpu: "10m"
-EOF
 
 ## 7. Redis Pod Issue
 
-kubectl create ns debug-redis
+kubectl create ns debug-redis || true
 
 cat <<EOF | kubectl apply -f -
 apiVersion: v1
@@ -136,7 +112,7 @@ EOF
 
 ## 8. Another Pod Issue
 
-kubectl create ns another-issue
+kubectl create ns another-issue || true
 
 cat <<EOF | kubectl apply -f -
 apiVersion: v1
@@ -162,7 +138,7 @@ EOF
 
 
 ## 10. Issue Pod PVC
-kubectl create ns my-pod-cka
+kubectl create ns my-pod-cka || true
 
 cat <<EOF | kubectl apply -f -
 apiVersion: v1
@@ -220,7 +196,7 @@ EOF
 
 ## 12. Deployement Issue - postgres
 
-kubectl create ns fix-postgres
+kubectl create ns fix-postgres || true
 
 cat <<EOF | kubectl apply -f -
 apiVersion: v1
@@ -269,4 +245,56 @@ spec:
                   key: db_password
           ports:
             - containerPort: 5432
+EOF
+
+## 14. Cronjob Issue
+
+kubectl create ns failed-cron-job || true
+
+kubectl -n failed-cron-job run cka-cron-pod --image=nginx:1.29-alpine --labels="id=cka-training-ready"
+
+cat <<EOF | kubectl apply -f -
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: cka-failed-cronjob
+  namespace: failed-cron-job
+spec:
+  concurrencyPolicy: Allow
+  failedJobsHistoryLimit: 3
+  successfulJobsHistoryLimit: 3
+  schedule: '*/3 * * * *'
+  suspend: false
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - command:
+            - curl
+            - cka-cron-pod
+            image: curlimages/curl:latest
+            imagePullPolicy: Always
+            name: curl-container
+            resources: {}
+          restartPolicy: Never
+
+EOF
+
+cat <<EOF | kubectl apply -f -
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: cka-cron-pod 
+  name: cka-cron-svc
+  namespace: failed-cron-job
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: cka-cron-pod 
 EOF

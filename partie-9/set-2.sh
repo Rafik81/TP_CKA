@@ -2,7 +2,7 @@
 
 ## 4. Pod issue
 
-kubectl create ns cka-pod-error
+kubectl create ns cka-pod-error || true
 
 cat <<EOF | kubectl apply -n cka-pod-error -f -
 apiVersion: apps/v1
