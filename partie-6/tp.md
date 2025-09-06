@@ -10,7 +10,6 @@ Utiliser le contexte : `kubectl config use-context kind-k8s-c1-h`
 - Lister les noms de toutes ressources kubernetes `namespaced` (comme pod, secret, configmap) dans le `/opt/cka/16/resources.txt` 
 
 
-
 ## 2. Network CNI
 
 Utiliser le contexte: `kubectl config use-context  kind-k8s-no-cni`
@@ -113,6 +112,8 @@ Vérifier que le pod est en Running
 
 Utiliser le contexte: `kubectl config use-context  kind-k8s-no-cni`
 
+> **Consignes**
+
 - Créer et utiliser le namespace `public-app`
 - Créer un deployment **public-app** avec l'image `nginx:1.29-alpine`, containerPort 80 et 1 replicas
 - Exposer le avec un service clusterIp `public-app-svc`
@@ -126,6 +127,8 @@ Depuis l'un des node, vérifier que ca fonctionne avec `curl -H 'Host: public-ap
 
 Utiliser le contexte: `kubectl config use-context  kind-k8s-no-cni`
 
+> **Consignes**
+
 - Créer et utiliser le namespace `dns-test`
 - Créer le pod `dns-web-app` avec `nginx:1.29-alpine`
 
@@ -135,3 +138,43 @@ Utiliser le contexte: `kubectl config use-context  kind-k8s-no-cni`
 - Vérifier que le pod `dns-wget` arrive bien à joindre le service
   - `wget -qO- http://dns-web-svc`
   - `wget -qO- http://dns-web-svc.dns-test.svc.cluster.local`
+
+
+## 9. API Gateway
+
+Utiliser le contexte: `kubectl config use-context  kind-k8s-no-cni`
+
+API GATEWAY DOC: [https://gateway-api.sigs.k8s.io/guides/](https://gateway-api.sigs.k8s.io/guides/)
+
+> **Consignes**
+
+- Installer/Activer les CRD Api Gateway
+  
+```shell
+kubectl apply -f - <<EOF
+apiVersion: operator.tigera.io/v1
+kind: GatewayAPI
+metadata:
+  name: default
+EOF
+```
+
+- Dans `/opt/cka/gateway-crd.txt`, écrire tous les noms des resources/CRD apprtenant à l' Api Group `gateway.networking.k8s.io`
+
+- Créer et utiliser le namespace `gateway`
+
+- Créer les deployements `gw-app1` et `gw-app2`  avec `nginx:1.29-alpine` 
+
+- Exposer `gw-app1` avec le service `gw-app1-svc` sur le port 8081
+- Exposer `gw-app2` avec le service `gw-app2-svc` sur le port 8082
+
+Vous allez maintenant créer les objets API Gateways
+
+- Créer un **Gateway** nommé `central-gateway`  qui écoute sur le port 80, utiliser le gateway class existant.
+
+- Créer un **HTTPRoute** `gw-app-routes`  utilisant le Gateway `central-gateway` pour router le trafic vers les services (backend)
+  - Path `/app1/` doit router vers le service `gw-app1-svc`
+  - Path `/app2/` doit router vers le service `gw-app2-svc`
+  - Utiliser le **hostname** : `gw.formatio.cka`
+
+- Lister/Ecrire  les services dans le namespace `tigera-gateway`  dans `/opt/cka-gw-calico.txt`

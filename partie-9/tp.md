@@ -258,4 +258,8 @@ Dans le namespace `kubectl create ns failed-cron-job`,  se trouve un CronJob `ck
 
 Les pods associés au jobs de ce cronjob sont en **erreur**
 
-Fixez le problème afin que le pod du job puisse être Completed
+- Fixez le problème afin que le pod du job puisse être Completed
+
+- Faites un get sur le pod `Completed` et stocker l'outpout dans `/opt/cka/cron-completedt.txt`
+
+- Supprimer le cronjob
