@@ -1,5 +1,7 @@
 #!/bin/bash
 
+## 4. Pod issue
+
 kubectl create ns cka-pod-error
 
 cat <<EOF | kubectl apply -n cka-pod-error -f -

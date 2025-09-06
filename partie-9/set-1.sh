@@ -1,5 +1,7 @@
 #!/bin/bash
 
+## 3. Fix node Worker
+
 systemctl stop kubelet > /dev/null 2>&1 || true
 systemctl disable kubelet > /dev/null 2>&1 || true
 systemctl daemon-reload > /dev/null 2>&1 || true

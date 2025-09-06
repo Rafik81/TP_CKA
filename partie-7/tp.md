@@ -19,7 +19,7 @@ volumebindingmode=
 Is-default-class?=
 ```
 
-- créer un nouvea storageclass nommé `asap-sc` avec volumebindingmode `Immediate`, utiliser rovisionner `kubernetes.io/no-provisioner`
+- créer un nouveau storageclass nommé `asap-sc` avec volumebindingmode `Immediate`, utiliser rovisionner `kubernetes.io/no-provisioner`
 - Autoriser l'expansion de volume 
 
 - Faites en sorte que `asap-sc` soit le storageclass par defaut et l'unique.
@@ -34,7 +34,7 @@ Utiliser le contexte `kubectl config use-context kind-k8s-c2-ac`
 > **Consignes**
 
 - Créer le dossier `/tmp/pv-data`
-- Créer un **PersistenVolume** nommé `safari-pv` avec une capacité de `128Mi`, accessMode `ReadWriteOnce`, `hostPath` `/tmp/pv-data` et  **aucun** storageClassName défini
+- Créer un **PersistentVolume** nommé `safari-pv` avec une capacité de `128Mi`, accessMode `ReadWriteOnce`, `hostPath` `/tmp/pv-data` et  **aucun** storageClassName défini
 - Vérifer que le PV a été bien créé
 
 - Lister les storageClass présents et faites en sorte **qu'aucun** ne soit le storageclass par defaut `default` , sans les supprimer
@@ -99,3 +99,15 @@ Utiliser le contexte `kubectl config use-context kind-k8s-c2-ac`
 
 - Céer un **StatefulSet** nommé `web` utilisant `nginx:1.29-alpine` avec 2 replicas et `80` comme containerPort
 - Definir et monter  de la **persistence** de données avec ces caratéristiques: storage=64Mi, accessMode=ReadWriteOnce, storageClassName=standard, nom=www, mountPath=`/usr/share/nginx/html`
+
+## 6. PVC - PV
+
+Utiliser le contexte `kubectl config use-context kind-k8s-c2-ac`
+
+> **Consignes**
+
+
+
+- Créer un **PersistentVolume** nommé `cka-pv` avec une capacité de `128Mi`, accessMode `ReadWriteOnce`, storageClass=standard et `hostPath` `/tmp/data`
+  
+- Dans le namespace `default` créer le PersistentVolumeClaim `cka-pvc` qui hérite du PersistentVolume `cka-pv`. Une fois créer le status de  PersistentVolume `cka-pv`  doit être `Boound`
