@@ -1,14 +1,9 @@
 # Installation Cluster
 
-## Setup des futurs nodes du cluster
 
-- 1 Nodes pour former le Control Plane
-- 2 Workers
-- `kubeadm-cluster.formation` : utiliser comme le nom DNS pour l'IP LOADBLANCER = IP du Helper
+## Clean Up
 
-
-Sur chacun des 3 nodes, réalisez les actions suivantes:
-
+Pour ceux qui ont déja un cluster Kubenetes existant, il faut reset les VMS
 
 > **Cleanup des anciennes VMs**
 
@@ -32,6 +27,18 @@ rm -rf /etc/haproxy
 systemctl daemon-reload
 rm -rf ~/admin.conf /home/ambient-user/admin.conf
 ```
+
+
+
+## Setup des futurs nodes du cluster
+
+- 1 Nodes pour former le Control Plane
+- 2 Workers
+- `kubeadm-cluster.formation` : utiliser comme le nom DNS pour l'IP LOADBLANCER = IP du Helper
+
+
+Sur chacun des 3 nodes, réalisez les actions suivantes:
+
 
 
 ```shell
