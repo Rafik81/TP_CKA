@@ -9,6 +9,31 @@
 
 Sur chacun des 3 nodes, réalisez les actions suivantes:
 
+
+> **Cleanup des anciennes VMs**
+
+```shell
+sudo kubeadm reset --force --cleanup-tmp-dir || true
+sudo rm -rf /var/lib/kubelet /var/lib/etcd /etc/kubernetes /etc/cni /opt/cni || true
+systemctl daemon-reload
+
+sudo apt-mark unhold kubelet kubectl kubeadm || true
+sudo apt remove -y kubelet kubectl kubeadm containerd || true
+sudo rm -rf /etc/modules-load.d/nvme_tcp.conf /etc/modules-load.d/k8s.conf /etc/apt/sources.list.d/kubernetes.list /etc/apt/keyrings/kubernetes-apt-keyring.gpg /etc/containerd/
+systemctl daemon-reload
+```
+
+> **CleanUp VM helper**
+
+
+```shell
+apt remove -y haproxy
+rm -rf /etc/haproxy
+systemctl daemon-reload
+rm -rf ~/admin.conf /home/ambient-user/admin.conf
+```
+
+
 ```shell
 
 sudo su -
