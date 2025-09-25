@@ -68,7 +68,7 @@ Utiliser le contexte: `kubectl config use-context  kind-k8s-no-cni`
 > **Consignes**
 
 - Créer un **replicaSet** nommé `ns-lookup` avec 2 replicas,   nommer le container `dns` - Assurez-vous que les pods restent en Running
-- Exécyter `nslookup kubernetes.default` depuis un de ces pods et stockés le output dans `/opt/cka/nslookup.txt`
+- Exécuter `nslookup kubernetes.default` depuis un de ces pods et stockés le output dans `/opt/cka/nslookup.txt`
 
 ## 6. NodePort
 
