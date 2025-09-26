@@ -67,7 +67,7 @@ Utiliser le contexte: `kubectl config use-context  kind-k8s-no-cni`
 
 > **Consignes**
 
-- Créer un **replicaSet** nommé `ns-lookup` avec 2 replicas,   nommer le container `dns` - Assurez-vous que les pods restent en Running
+- Créer un **replicaSet** nommé `ns-lookup` avec 2 replicas,   nommer le container `dns` avec l'image `registry.k8s.io/e2e-test-images/jessie-dnsutils:1.3` - Assurez-vous que les pods restent en Running
 - Exécuter `nslookup kubernetes.default` depuis un de ces pods et stockés le output dans `/opt/cka/nslookup.txt`
 
 ## 6. NodePort
@@ -79,7 +79,7 @@ Utiliser le contexte: `kubectl config use-context  kind-k8s-no-cni`
 - Créer et utiliser le namespace `cka-nodeport`
 - Créer un deployment **nginx-app** avec l'image `nginx:1.29-alpine`, containerPort 80 et 1 replicas
 
-- Créer un nodePort nommé `cka-nodeport` pour exposer le deployment **nginx-app* avec les infos suivantes:
+- Créer un nodePort nommé `cka-nodeport` pour exposer le deployment **nginx-app** avec les infos suivantes:
   - port: 80
   - target port: 80
   - node port: 32000
