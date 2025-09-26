@@ -10,9 +10,6 @@ bash cka-upgrade-2.sh
 
 ```
 
-Enfin, depuis le Helper utiliser `kubectl delete` pour supprimer le node
-
-
 ## Consignes 
 
 Utiliser ce contexte pour l'exercice: `kubectl config use-context kind-k8s-node-upgrade`
