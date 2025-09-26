@@ -252,6 +252,20 @@ exit
 
 Utiliser le contexte `kubectl config use-context  kind-k8s-no-cni`
 
+
+> **Setup**
+
+Si vous n'avez pas faire la question le setup indiqué à question **5**, merci de le faire ici avant de l'exercice
+
+```shell
+kubectl config use-context  kind-k8s-no-cni
+
+rm -f set-3.sh
+curl https://gitlab.enoks.fr/pub/tp-cka/-/raw/master/partie-9/set-3.sh -O
+bash set-3.sh
+
+```
+
 > **Consignes**
 
 Dans le namespace `kubectl create ns failed-cron-job`,  se trouve un CronJob `cka-failed-cronjob` censé s'exécuter chaque **2 minutes** pour vérifier que le pod `cka-cron-pod` exposé (en théorie) via le service `cka-cron-svc` est bien UP

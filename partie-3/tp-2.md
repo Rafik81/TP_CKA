@@ -55,12 +55,14 @@ Trouvez les informations suivantes concernant le cluster `kind-k8s-c1-h` :
 Pour vous connecter à node de ce cluster utiliser `sudo dssh <node>`
 
 # /opt/cka/cluster-info
+
+```shell
 1 : [RÉPONSE]
 2 : [RÉPONSE]
 3 : [RÉPONSE]
 4 : [RÉPONSE]
 5 : [RÉPONSE]
-
+```
 
 ## 4. Créer un pod statique & service
 

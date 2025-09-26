@@ -60,7 +60,7 @@ Utiliser le contexte `kubectl config use-context kind-k8s-c2-ac`
 
 - Associer le clusterrole `view` au SA `group-view`  pour lui permettre de voir tout dans le cluster, utiliser le nom `group-view`
 
-- Créer un  clusterrole `cka-cluster-role` avec les permissions `create`, `get`, `lists` sur les deplyments et les pods
+- Créer un  clusterrole `cka-cluster-role` avec les permissions `create`, `get`, `list` sur les deployments et les pods
 
 - Associer clusterrole `cka-cluster-role` au SA `group-custom` en utilisan tle même nom
 
