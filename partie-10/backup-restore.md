@@ -1,13 +1,35 @@
 # Etcd Snapshot Save and Restore
 
+## Preparation
+
+```shell
+cat > kind-etcd.yaml <<EOF
+kind: Cluster
+apiVersion: kind.x-k8s.io/v1alpha4
+nodes:
+  - role: control-plane
+  - role: worker
+  - role: worker
+EOF
+
+kind create cluster -n back-rest --config kind-etcd.yaml
+
+```
+
 
 ## Consignes
 
-- Effectuez une sauvegarde de `etcd` tournant sur `master-1`  et enregistrez-la sur le nœud  dans `/tmp/etcd-backup.db`
 
-- Créez ensuite un pod de votre choix dans le cluster.
+Utiliser le contexte `kubectl config use-context kind-back-rest` 
 
-- Enfin, restaurez la sauvegarde, vérifiez que le cluster fonctionne toujours et que le pod créé n'est plus présent.
+- Effectuez une sauvegarde du `etcd` du node **Master**  et enregistrez-la sur le nœud  dans `/tmp/etcd-backup.db`
+  - Utiliser `apt update -y && apt install -y etcd-client`
+
+- Créez ensuite dans le namespace `default` le pod `etcd-before-restore` avec `nginx:1.29-alpine`
+
+- Enfin, restaurez la sauvegarde, danvérifiez que le cluster fonctionne toujours et que le pod créé n'est plus présent.
+
+
 
 ## 🔧 Quelques Étapes attendues
 
@@ -19,9 +41,9 @@
   
 - Faites le snapshot
   
-- Créer le pod de votre choix
+- Créer le pod demandé
   
-- Arrêter à minima les pods statiques: kube-apiserver, etcd
+- Arrêter à minima les pods statiques: vérifier et attendre ou faire le nécessaire afin qu'ils disparaissent de l'output de  `crictl ps`
   
 - **Faites la restauration** - n'oublier pas le `data-dir`!
   
