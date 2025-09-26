@@ -2,8 +2,6 @@
 
 ## Preparation
 
-- **Drainer**  le node `worker-2` et ensuite connecter vous au node pour exécuter:
-
 ```shell
 
 rm -f cka-upgrade-2.sh
