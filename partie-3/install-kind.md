@@ -16,7 +16,7 @@ chmod +x dssh.sh
 sudo mv dssh.sh /usr/local/bin/dssh
 ```
 
-**A faire avec le user normal**
+> **A faire avec le user normal**
 
 
 ```shell

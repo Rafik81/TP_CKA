@@ -3,19 +3,14 @@
 
 ## Clean Up
 
-Pour ceux qui ont déja un cluster Kubenetes existant, il faut reset les VMS
+Pour ceux qui ont déjà un cluster Kubernetes existant, il faut reset les VMS
 
 > **Cleanup des anciennes VMs**
 
 ```shell
-sudo kubeadm reset --force --cleanup-tmp-dir || true
-sudo rm -rf /var/lib/kubelet /var/lib/etcd /etc/kubernetes /etc/cni /opt/cni || true
-systemctl daemon-reload
-
-sudo apt-mark unhold kubelet kubectl kubeadm || true
-sudo apt remove -y kubelet kubectl kubeadm containerd || true
-sudo rm -rf /etc/modules-load.d/nvme_tcp.conf /etc/modules-load.d/k8s.conf /etc/apt/sources.list.d/kubernetes.list /etc/apt/keyrings/kubernetes-apt-keyring.gpg /etc/containerd/
-systemctl daemon-reload
+rm -rf cleanup-node.sh
+wget https://gitlab.enoks.fr/pub/scripts/-/raw/master/scripts/cleanup-node.sh
+sudo bash cleanup-node.sh
 ```
 
 > **CleanUp VM helper**
@@ -29,12 +24,11 @@ rm -rf ~/admin.conf /home/ambient-user/admin.conf
 ```
 
 
-
 ## Setup des futurs nodes du cluster
 
 - 1 Nodes pour former le Control Plane
 - 2 Workers
-- `kubeadm-cluster.formation` : utiliser comme le nom DNS pour l'IP LOADBLANCER = IP du Helper
+- `kubeadm-cluster.formation` : utiliser comme le nom DNS pour l'IP LOAD-BALANCER = IP du Helper
 
 
 Sur chacun des 3 nodes, réalisez les actions suivantes:
@@ -53,14 +47,13 @@ bash prepare-nodes.sh
 kubeadm version
 
 # Set le hostname en tant que master-xxx ou worker-xxx
-hostnamectl set-hostname xxx  
-
+hostnamectl set-hostname <master-1|worker-1|worker-2>
 
 ```
 
 ## Setup du Helper
 
-Le Helper va héberger le Haproxy qui va servir à faire du HA, Loadbalancing
+Le Helper va héberger le **Haproxy** qui va servir à faire du HA, le load-balancing
 
 Depuis VM Helper, réalisez les actions suivantes:
 
@@ -68,7 +61,7 @@ Depuis VM Helper, réalisez les actions suivantes:
 
 sudo su -
 
-# exporter les IP des fututurs nodes duc cluster
+# exporter les IP des futurs nodes du cluster
 export IP_MASTER_1=
 export IP_WORKER_1=
 export IP_WORKER_2=
@@ -83,9 +76,9 @@ sudo systemctl status haproxy --no-pager --quiet
 
 # bash completion
 
-echo 'source <(kubectl completion bash)' >>~/.bashrc
-echo 'alias k=kubectl' >>~/.bashrc
-echo 'complete -o default -F __start_kubectl k' >>~/.bashrc
+echo 'source <(kubectl completion bash)' >> ~/.bashrc
+echo 'alias k=kubectl' >> ~/.bashrc
+echo 'complete -o default -F __start_kubectl k' >> ~/.bashrc
 exec -l $SHELL
 
 # au besoin faites un EXIT pour revenir sur le user normal
@@ -94,12 +87,12 @@ exec -l $SHELL
 
 
 
-## Creation du cluster HA
+## Création du cluster HA
 
 
 - 1 Node(s) pour former le Control Plane
 - 2 Workers
-- `kubeadm-cluster.formation` : utiliser comme le nom DNS pour l'IP LOADBLANCER = IP du Helper
+- `kubeadm-cluster.formation` : utiliser comme le nom DNS pour l'IP LOAD-BALANCER = IP du Helper
 
 
 ### Sur le Master 1
@@ -109,8 +102,8 @@ exec -l $SHELL
 sudo kubeadm init  --pod-network-cidr=172.20.0.0/16  --control-plane-endpoint kubeadm-cluster.formation 
 
 
-# Noter les commandes "kubeadm" join qui sont dans le ouput
-# elles serviront à ajouter les autres noeuds
+# Noter les commandes "kubeadm" join qui sont dans le output
+# elles serviront à ajouter les autres nodes
 
 
 # vérification
@@ -165,15 +158,11 @@ worker-1   NotReady   worker          2m7s    v1.33.4
 worker-2   NotReady   worker          2m1s    v1.33.4
 ```
 
-
-
 > **Pourquoi** les nodes sont toujours en `NotReady` ?
-
 
 ## Installer le CNI - Cilium
 
 Sur le Helper
-
 
 ```shell
 wget https://gitlab.enoks.fr/pub/scripts/-/raw/master/scripts/install-cilium-cli.sh
@@ -189,14 +178,17 @@ k -n  kube-system get no,po
 ## Installer Metrics-Server
 
 ```shell
-kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
+kubectl apply -f https://gitlab.enoks.fr/pub/tp-cka/-/raw/master/partie-3/metric-server.yaml
 
-# une fois les pods OK
-k top node
+k -n kube-system get po -l k8s-app=metrics-server
+NAME                              READY   STATUS    RESTARTS   AGE
+metrics-server-576c8c997c-9nscm   1/1     Running   0          10m
 
-# HA
-## kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/high-availability-1.21+.yaml
+# vérifier
+
+k top nodes
 ```
+
 
 ## Exploration de composants
 
@@ -216,7 +208,7 @@ kube-scheduler-master2   1/1     Running   0          3h5m
 kube-scheduler-master3   1/1     Running   0          3h2m
 
 
-# Depuis un Node on va deplacer le fichier kube-scheduler.yaml
+# Depuis un Node on va déplacer le fichier kube-scheduler.yaml
 
 cd /etc/kubernetes/manifests
 ls

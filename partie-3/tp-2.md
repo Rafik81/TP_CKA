@@ -71,7 +71,7 @@ Pour vous connecter à node de ce cluster utiliser `sudo dssh <node>`
 
 > **Consignes**
 
-- Créer un pod statique nommé **static-pod** dans le namepsace `default` sur le node control-plane  avec l'image `nginx:1.29-alpine` avec comme ressources requets `10m`CPU et `20Mi` memory
+- Créer un pod statique nommé **static-pod** dans le namespace `default` sur le node control-plane  avec l'image `nginx:1.29-alpine` avec comme ressources requests `10m`CPU et `20Mi` memory
 
 - Créer un service de type NodePort pour exposer le pod  sur le port 80
   - Vérifier que le service crée a bien un endpoint dont l'IP correspond  au internal IP du controlPlane
@@ -80,13 +80,13 @@ Pour vous connecter à node de ce cluster utiliser `sudo dssh <node>`
 
 ## 5. Kubelet client/server cert info
 
-- Utiliser ce contexte pour l'exercice: `kubectl use-context kind-k8s-c2-ac`
+- Utiliser ce contexte pour l'exercice: `kubectl config use-context kind-k8s-c2-ac`
 
 > **Consignes**
 
 Le cluster a un node Worker
 
-Trouver la valeur du  `Issuer` et `Key Usage"` sur ce node pour:
+Trouver la valeur du  `Issuer` et `Extended Key Usage` sur ce node pour:
 
 1. `kubelet client certificate`, celui utilisé pour les connexions sortantes vers le serveur kube-apiserver.
 2. `kubelet server certificate`, celui utilisé pour les connexions entrantes provenant du serveur kube-apiserver.
@@ -100,9 +100,9 @@ Utiliser le contexte/cluster **kubeadm** `kubeadm-cluster-formation`
 
 Connecter-vous au node Master `master-1`
 
-- Vérifier la durée de validité du certificat du serveur `kube-apiserver`. Utilisez `openssl` ou `cfssl`. Notez la date d'expiration dans `/opt/cka/expiration` de la machien centrale
+- Vérifier la durée de validité du certificat du serveur `kube-apiserver`. Utilisez `openssl` ou `cfssl`. Notez la date d'expiration dans `/opt/cka/expiration` de la machine centrale
 
-- Utiliser la commande `kubeadm` pour également lister la durée et confirmez que les deux méthodes retournent le même resulat
+- Utiliser la commande `kubeadm` pour également lister la durée et confirmez que les deux méthodes retournent le même résultat
 
-- Ecrire dans `/opt/cka/kubeadm-renew-certs.sh` la commande pour renouveller le certificat de `kube-apiserver` . Ne pas renouveller le certificat
+- Ecrire dans `/opt/cka/kubeadm-renew-certs.sh` la commande pour renouveler le certificat de `kube-apiserver` . Ne pas renouveler le certificat
 

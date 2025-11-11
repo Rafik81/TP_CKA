@@ -1,4 +1,4 @@
-# Worloads - Scheduing
+# Workloads - Scheduling
 
 
 Sur la machine/VM Kind, exécuter le fichier script `prepare.sh` avec le **user normal** en avec copy-paste ou comme suit:
@@ -20,7 +20,7 @@ Utiliser le contexte: `kubectl config use-context kind-k8s-c1-h`
 
 - Créer un seul pod de l'image `httpd:2.4.65-alpine` dans le namespace `default`. 
 - Le pod doit être nommé `pod1` et le container  doit être nommé `pod1-container`. 
-- Ce pod ne doit être planifié que sur **un node Master**, **n'ajoutez pas** de nouveaux labels aux nodes, aucun.
+- Ce pod ne doit être planifié que sur un node de type **Master**, **n'ajoutez pas** de nouveaux labels aux nodes, aucun.
 
 
 ## 2. Scale down
@@ -30,7 +30,7 @@ Utiliser le contexte: `kubectl config use-context kind-k8s-c1-h`
 > **Consignes**
 
 - Il y'a 3 pods nommés `stsapp-*` dans le namespace `project-sts-app`.
-- On vous demande de scale down le nombre à `1 replica` pour éconmiser de la ressource pour les autres.
+- On vous demande de scale down le nombre à `1 replica` pour économiser de la ressource pour les autres.
 
 
 ## 3. Liveness - Readiness
@@ -43,7 +43,7 @@ Utiliser le contexte: `kubectl config use-context kind-k8s-c1-h`
 
 - Dans ce dernier, créer un pod nommé `ready-if-service-ready` of image `nginx:1.29-alpine`
   
-- Ajouter un  **LivenessProbe** qui exécute simplment `true`
+- Ajouter un  **LivenessProbe** qui exécute simplement `true`
   
 - Configurer également un **ReadinessProbe** qui check si l'url `http://service-am-i-ready:80` est accessible. 
   - Vous pouvez utiliser `wget -T2 -O- http://service-am-i-ready:80` pour ça
@@ -51,9 +51,9 @@ Utiliser le contexte: `kubectl config use-context kind-k8s-c1-h`
 Démarrer le Pod et confirmer qu'il n'est pas `Ready`à cause du **ReadinessProbe**
 
 
-- Créer un second pod nommé `am-i-ready`  avec le label `id: cka-training-ready` en utilisant  la même image. Le service `service-am-i-ready` déja existant devrait avoir le second pod comme ENdpoint.
+- Créer un second pod nommé `am-i-ready`  avec le label `id: cka-training-ready` en utilisant  la même image. Le service `service-am-i-ready` déjà existant devrait avoir le second pod comme Endpoint.
 
-Le premier pod devrait être `Ready`maintenant. COnfirmer cela
+Le premier pod devrait être `Ready`maintenant. Confirmer cela
 
 ## 4. Kubectl
 
@@ -61,7 +61,7 @@ Utiliser le contexte: `kubectl config use-context kind-k8s-c1-h`
 
 > **Consignes**
 
-- Ecrire dans le fichier `/top/tcka/find-pods.sh`  la commande `kubectl`  qui pert de lister tous les pods du cluster en les triant(sort) par leur âge: `metadata.creationTimestamp`
+- Ecrire dans le fichier `/top/tcka/find-pods.sh`  la commande `kubectl`  qui permet de lister tous les pods du cluster en les triant(sort) par leur âge: `metadata.creationTimestamp`
 
 - Ecrire dans  `/top/tcka/find-pods-uid.sh` la commande `kubectl` qui les liste tous mais en triant cette fois avec le champ `metadata.uid`
 
@@ -79,18 +79,18 @@ Ecrire la commande `kubectl`
 - pour afficher l'usage de ressources des pods et leurs containers `/opt/cka/pod.sh`
 
 
-## 6. Scheduling manuel
+## 6. Scheduling Manuel
 
 
 Utiliser le context `kubectl config use-context kind-k8s-c2-ac`
 
 > **Consignes**
 
-- Utiliser `dssh`pour vous connetcer au node Master
+- Utiliser `dssh`pour vous connecter au node Master
 - Arrêter le composant `kube-scheduler`
 - Créer un pod nommé `manual-schedule` avec l'image `nginx:1.29-alpine`
 
-Confirmer que le pod est crée mais il n'est pas schedule/placé sur un node. Ajouter le output du `k get po <le pod>` dans `/opt/cka/manual-scheule.txt`
+Confirmer que le pod est crée mais il n'est pas schedule/placé sur un node. Ajouter le output du `k get po <le pod>` dans `/opt/cka/manual-schedule.txt`
 
 - **Manuellement**, placer/scheduler le pod sur un node, confirmer qu'il est en `Running`
 
@@ -121,7 +121,7 @@ Utiliser le contexte: `kubectl config use-context kind-k8s-c3-ccc`
 
 - Créer un pod nommé `secret-pod` avec l'image `busybox:1.36` qui doit rester en running
   
-- Il y a un secret  existant à `/tmp/secret-toto.yaml` , créer le dans le namepsace et monter le en **readonly**  sur `/tmp/secret-toto` du pod
+- Il y a un secret  existant à `/tmp/secret-toto.yaml` , créer le dans le namespace et monter le en **readonly**  sur `/tmp/secret-toto` du pod
   
 - Créer un nouveau Secret nommé `secret2` avec pour données `user=user2` et `password=fomationcka123`. Ces données doivent être disponibles à l'intérieur du pod en tant que variable d'environnement `APP_USER` et `APP_PASSWORD`
   
