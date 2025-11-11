@@ -61,9 +61,9 @@ Utiliser le contexte: `kubectl config use-context kind-k8s-c1-h`
 
 > **Consignes**
 
-- Ecrire dans le fichier `/top/tcka/find-pods.sh`  la commande `kubectl`  qui permet de lister tous les pods du cluster en les triant(sort) par leur âge: `metadata.creationTimestamp`
+- Ecrire dans le fichier `/opt/tcka/find-pods.sh`  la commande `kubectl`  qui permet de lister tous les pods du cluster en les triant(sort) par leur âge: `metadata.creationTimestamp`
 
-- Ecrire dans  `/top/tcka/find-pods-uid.sh` la commande `kubectl` qui les liste tous mais en triant cette fois avec le champ `metadata.uid`
+- Ecrire dans  `/opt/tcka/find-pods-uid.sh` la commande `kubectl` qui les liste tous mais en triant cette fois avec le champ `metadata.uid`
 
 
 
@@ -105,10 +105,10 @@ Utiliser le contexte: `kubectl config use-context kind-k8s-c1-h`
 
 - Créer un namespace nommé `projet-demon`  et utiliser le pour cet exercice
 
-- Créer un daemonset nommé `critic-worload` avec l'image `httpd:2.4.65-alpine`
+- Créer un daemonset nommé `critic-workload` avec l'image `httpd:2.4.65-alpine`
   - Il doit tourner sur **tous les nodes**
   - il doit avoir les labels `id=demon-critique` et `uuid=18426a0b-5f59-4e10-923f-c0e078e82462`
-  - Il doit avoir en resource requets: 10 millicore de cpu et 8 mebibyte memory
+  - Il doit avoir en resource requests: 10 millicore de cpu et 8 mebibyte memory
 
 
 ## 8. Secret
@@ -141,9 +141,10 @@ Utiliser le contexte: `kubectl config use-context kind-k8s-c1-h` et le namespace
 - Créer un  Deployment nommé  `deploy-important` ayant **3 replicas** avec le  label `id=very-important`, les pods doivent avoir ce label également
 - il doit contenir **2 containers**:
   - Le premier `container1`avec l'image `nginx:1.29-alpine`
-  - Le second `container2` avec l'image `kubernetes/pause`
+  - Le second `container2` avec l'image `registry.k8s.io/pause:latest`
 
-Il **doit y avoir un et un seul pod par node** : comme replicas=3 et  il n'y a que 2 workers, l'un des 3 pods ne sera pas schedulé tant qu'un 3è worker n'est pas ajouté.
+Il **doit y avoir un et un seul pod par node** : comme replicas=3 et  il n'y a que 2 workers, l'un des 3 pods ne sera pas schedule tant qu'un 3è worker n'est pas ajouté.
+
 D'une certaine manière, nous simulons ici le comportement d'un DaemonSet, mais en utilisant un Deployment et un nombre fixe de replicas
 
 
@@ -187,18 +188,18 @@ Utiliser le contexte `kubectl config use-context kind-k8s-c2-ac`
 - Créer un deployment nommé `deploy-rollout` avec `nginx:1.29-alpine` et  `1 replica` et vérifier que le pod est en `Running`
 
 
+- Modifier le deployment pour ajouter un **livenessProbe**  de type HTTP au container s'assurant qu'il est up et écoute sur son port `80`
+  - avec un failure threshold = 3, initialDelaySeconds 5 et success threshold = 1
+
 Ensuite:
 
-- Modifier le deployment pour ajouter un **livenessProbe**  de type HTTP au container s'assurant qu'il est up et écoute sur son port `80`
-  - avec un failure threshold = 3, initialDelaySeconds 5 et succes threshold = 1
-
-- Scaler le deployement à **2 replicas**
+- Scaler le deployment à **2 replicas**
 
 - Update: upgrader la version de l'image à `nginx:1.29.1-alpine`
 
 - Quelle est la valeur(le numéro) de révision actuelle du deployement ? stocker la dans `/opt/cka/revision.txt`
 
-- A l'aide de `kubectl` sans éditer le yaml, revenez(rollback) à la  **revision** `2`
+- A l'aide de `kubectl` sans éditer le yaml, revenez(rollback) à la  **revision** `1`
 
 - Créer un **HorizontalPodAutoscaler** `deploy-rollout-scale` pour le deployment avec pour valeur min=1 max=3 lorsque le pourcentage du cpu atteint `95`
   
@@ -209,12 +210,12 @@ Utiliser le contexte `kubectl config use-context kind-k8s-c2-ac`
 
 > **Consignes** 
 
-Dans le namespace `cka-rolling` créer le deployement `rolling-app` avec **4 replicas** en utilisant  `nginx:1.29-alpine`
+Dans le namespace `cka-rolling` créer le deployment `rolling-app` avec **4 replicas** en utilisant  `nginx:1.29-alpine`
 
-- Quelle est le type de la strategie de mise à jour de ce deployement ? Quelle est la valeur de `max Surge` ? Ecrire les réponses dans `/opt/cka/strategie.txt`
+- Quelle est le type de la stratégie de mise à jour de ce deployment ? Quelle est la valeur de `max Surge` ? Ecrire les réponses dans `/opt/cka/strategie.txt`
 
 - Mettre à jour le deployment pour passer `max surge` à **1** et `max unvailable` à **1**
 
 
-- Mettre à jour(update) le deployement avec `nginx:1.29.1-alpine` en utilisant `kubectl set`
-  - Ecrire dans `/opt/cka/roll-kubectl-set.txt`  la command eutilisée
+- Mettre à jour(update) le deployment avec `nginx:1.29.1-alpine` en utilisant `kubectl set`
+  - Ecrire dans `/opt/cka/roll-kubectl-set.txt`  la command utilisée
