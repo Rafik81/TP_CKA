@@ -77,13 +77,13 @@ Utiliser le contexte `kubectl config use-context kind-k8s-c2-ac`
 > **Consignes**
 
 - Créer a Pod nommé **multi-container-playground** dans le  Namespace **default** avec trois  containers: c1, c2 and c3
-- Ils doivent partager le même volume attaché au Pod et monté sur chacun des trois containers. Cependant le volume ne doit pas persisté ni être partagé avec d'autres pods
+- Les containers doivent partager le même volume (le même monté sur chacun des trois containers) Cependant le volume ne doit pas persisté ni être partagé avec d'autres pods, nommer le volume `vol-data` et monter sur `/tmp/vol` 
 
 - Le container c1 doit être de l'image `nginx:1.29-alpine`  et avoir le nom du (futur) node où le  Pod est exécuté  en tant que variable d'environnement `MY_NODE_NAME`.
 
-- Le container c2 doit être de l'image `busybox:1.36` et écrire le output de la commande `date` toutes les secondes dans le volume partagé dans le fichier `date.log`. Pour cela, vous pouvez utiliser `while true; do date >> /your/vol/path/date.log; sleep 1; done`
+- Le container c2 doit être de l'image `busybox:1.36` et écrire le output de la commande `date` toutes les secondes dans le volume partagé dans le fichier `date.log`. Pour cela, vous pouvez utiliser `while true; do date >> /tmp/vol/date.log; sleep 1; done`
 
-- Le container c3 doit être de l'image `busybox:1.36` et envoyer en permanence le contenu du fichier `date.log`  du volume partagé vers stdout. Pour cela, vous pouvez utiliser `tail -f /your/vol/path/date.log`
+- Le container c3 doit être de l'image `busybox:1.36` et envoyer en permanence le contenu du fichier `date.log`  du volume partagé vers stdout. Pour cela, vous pouvez utiliser `tail -f /tmp/vol/date.log`
 
 
 Checker les logs  du container c3 pour confirmer que la configuration est correcte.

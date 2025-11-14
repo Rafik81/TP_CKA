@@ -44,14 +44,14 @@ systemctl daemon-reload
 exit
 ```
 
-- Se deconencter du node
+- Sortir  du node
 - Vérifier que le node passe en `notReady` après qq temps
 
 > **Consignes**
   
 Il semble y avoir un soucis avec l'un des node qui est `notReady`:
 
-- Fixer le problème pour que le node soit disponile et puisse accueillir de nouveaux pods
+- Fixer le problème pour que le node soit disponible et puisse accueillir de nouveaux pods
 - Ecrire la raison/cause du problème dans `/opt/cka/reason.txt`
 
 ## 4. Pod issue
@@ -72,7 +72,7 @@ bash set-2.sh
 
 > **Consignes**
 
-Un deployement nommé  `failing-app` est présent dans le namespace `cka-pod-error` mais ses pods ne sont pas en `Runnning`
+Un deployment nommé  `failing-app` est présent dans le namespace `cka-pod-error` mais ses pods ne sont pas en `Runnning`
 
 Fixer/corriger les problèmes suivants:
 
@@ -110,7 +110,7 @@ Utiliser le contexte `kubectl config use-context  kind-k8s-no-cni`
 
 > **Consignes**
 
-Dans le namespace `default`, on arrrive pas à créer le pod `deploy-httpd` avec le manifest suivant:
+Dans le namespace `default`, on arrive pas à créer le pod `deploy-httpd` avec le manifest suivant:
 
 ```yaml
 apiVersion: v1
@@ -155,7 +155,7 @@ Utiliser le contexte `kubectl config use-context  kind-k8s-no-cni`
 
 > **Consignes**
 
-Dans le namespace `default`, on arrrive pas à créer le pod `postgres-pod` avec le manifest ci-dessous.  Corriger et créer le pod
+Dans le namespace `default`, on arrive pas à créer le pod `postgres-pod` avec le manifest ci-dessous.  Corriger et créer le pod
 
 ```yaml
 apiVersion: v1
@@ -245,7 +245,7 @@ exit
 
 - Créer le pod `another-deb-pod` avec `kubectl create deploy another-deb-pod --image nginx:1.29-alpine --replicas=1`
 - Aucun pod du du deployment ne tourne, UP-TO-DATE=0  et READY 0/1
-- Sans supprimer ni modifier le dpeloyment, fixer le problème afin qu'il puisse avoir un pod en Running
+- Sans supprimer ni modifier le deployment, fixer le problème afin qu'il puisse avoir un pod en Running
 
 
 ## 14. Cronjob Issue
@@ -274,6 +274,6 @@ Les pods associés au jobs de ce cronjob sont en **erreur**
 
 - Fixez le problème afin que le pod du job puisse être Completed
 
-- Faites un get sur le pod `Completed` et stocker l'outpout dans `/opt/cka/cron-completedt.txt`
+- Faites un get sur le pod `Completed` et stocker l'output dans `/opt/cka/cron-completedt.txt`
 
 - Supprimer le cronjob
