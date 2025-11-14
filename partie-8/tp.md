@@ -84,7 +84,7 @@ Utiliser le contexte: `kubectl config use-context  kind-k8s-no-cni`
 
 > **Consignes**
 
-- Créer et utiliser le namepsace `cka-netpol`
+- Créer et utiliser le namespace `cka-netpol`
   
 - Créer un  deployment nommé `web` avec `nginx:1.29-alpine` et le label `app=web`
 - Créer un  deployment nommé `api` avec `nginx:1.29-alpine` et le label `app=api`
@@ -102,7 +102,7 @@ Utiliser le contexte: `kubectl config use-context kind-k8s-c1-h`
 
 > **Consignes**
 
-- Créer et utiliser le namepsace `project-snake`
+- Créer et utiliser le namespace `project-snake`
  
 - Créer un  pod nommé `db1` avec `postgres:13.22-alpine`, le label `run=db1` , container port 1111 et la variable environment `POSTGRES_HOST_AUTH_METHOD=trust`
 - Créer un  pod nommé `db2` avec `postgres:13.22-alpine`, le label `run=db2` , container port 2222 et la variable environment `POSTGRES_HOST_AUTH_METHOD=trust`
@@ -187,7 +187,7 @@ Pour des questions de sécurité, créer un **NetworkPolicy** nommé `np-backend
 Une fois appliquée, les requetes vers  `vault`sur le port 8080 ne devraient plus fonctionner
 
 
-On va autoriser un namepsace entier
+On va autoriser un namespace entier
 
 - Créer les namespaces `curl-allow` et `curl-deny`
 - Créer le pod `pod-allow` et `pod-deny` respectivement dans `curl-allow` et `curl-deny`
@@ -195,7 +195,7 @@ On va autoriser un namepsace entier
 
 Vérifier que ces deux pods peuvent joindre le pod `vault`sur le port 8080. EN fait tous les pods peuvent le joindre !  on va donc limiter cela
 
-- Dans le namepsace `project-snake` créer **NetworkPolicy** nommé `allow-ns-curl-allow` qui autorise uniquement tout le trafic venant du namespace `curl-allow` à joindre le pod `vault`sur le port 8080.
+- Dans le namespace `project-snake` créer **NetworkPolicy** nommé `allow-ns-curl-allow` qui autorise uniquement tout le trafic venant du namespace `curl-allow` à joindre le pod `vault`sur le port 8080.
 
 - Vérifier que le pod `pod-allow`  a toujours accès et pas le `pod-deny`
 

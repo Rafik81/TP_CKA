@@ -7,7 +7,7 @@ Utiliser le contexte `kubectl config use-context kind-k8s-c1-h`
 
 > **Consignes**
 
-- Ecrire dans `/opt/cka/cluster_events.sh` la commande qui affiche les derniers events du cluster entier, classé/trié en fonctiondu temps(time)
+- Ecrire dans `/opt/cka/cluster_events.sh` la commande qui affiche les derniers events du cluster entier, classé/trié en fonction du temps(time)
 
 - Tuer/kill le pod `kube-proxy` qui tourne sur le worker2 `xx-worker2` et stocker les events dans `/opt/cka/container_kill.log`
 
@@ -17,8 +17,8 @@ Utiliser le contexte `kubectl config use-context kind-k8s-c1-h`
 
 > Consignes**
 
-- Dans le namepsace `debug-pod` créer le pod `tigers-reunite` avec  l'image `httpd:2.4.65-alpine` et les labels `pod=container` et ` container=pod`
-- Identfier sur quel node, tourne le pod et aller sur le node en utilisant `dssh`
+- Dans le namespace `debug-pod` créer le pod `tigers-reunite` avec  l'image `httpd:2.4.65-alpine` et les labels `pod=container` et ` container=pod`
+- Identifier sur quel node, tourne le pod et aller sur le node en utilisant `dssh`
 
 Utiliser la commande `crictl` 
 

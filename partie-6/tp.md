@@ -25,7 +25,7 @@ Utiliser le contexte: `kubectl config use-context  kind-k8s-no-cni`
 Attendez un et vérifier que
 
 - les nodes sont `Ready`
-- les `coredns`dans `kube-system` sont en `Running`
+- les `coreDns`dans `kube-system` sont en `Running`
 
 
 ## 3. Service - Service Cluster IP
@@ -50,11 +50,11 @@ Utiliser le contexte: `kubectl config use-context  kind-k8s-no-cni`
 > **Consignes**
 
 
-- Créer et utiliser le namepsace `project-hamster`
+- Créer et utiliser le namespace `project-hamster`
 
 - Créer le pod `p2-pod` avec **2 containers**, une avec l'image `nginx:1.29-alpine` et l'autre avec  `busybox:1.36`- Assurez-vous que le container busybox reste en Running
 
-- Créer un service `p2-service` qui expose le pod à l'interieur du cluster sur le port `3000->80`
+- Créer un service `p2-service` qui expose le pod à l'intérieur du cluster sur le port `3000->80`
 
 - Vérifier `kube-proxy` tournent sur l'ensemble des nodes et qu'il utilise iptables. Utilise `crictl ps` pour cela
 
@@ -132,7 +132,7 @@ Utiliser le contexte: `kubectl config use-context  kind-k8s-no-cni`
 - Créer et utiliser le namespace `dns-test`
 - Créer le pod `dns-web-app` avec `nginx:1.29-alpine`
 
-- Exposer le pod `dns-web-app` avec un service clusertIP `dns-web-svc`, port 80
+- Exposer le pod `dns-web-app` avec un service cluserIP `dns-web-svc`, port 80
   
 - Lancer un pod `dns-wget`avec l'image `busybox:1.36`, il doit rester en running
 - Vérifier que le pod `dns-wget` arrive bien à joindre le service
@@ -159,11 +159,11 @@ metadata:
 EOF
 ```
 
-- Dans `/opt/cka/gateway-crd.txt`, écrire tous les noms des resources/CRD apprtenant à l' Api Group `gateway.networking.k8s.io`
+- Dans `/opt/cka/gateway-crd.txt`, écrire tous les noms des resources/CRD appartenant à l' Api Group `gateway.networking.k8s.io`
 
 - Créer et utiliser le namespace `gateway`
 
-- Créer les deployements `gw-app1` et `gw-app2`  avec `nginx:1.29-alpine` 
+- Créer les deployments `gw-app1` et `gw-app2`  avec `nginx:1.29-alpine` 
 
 - Exposer `gw-app1` avec le service `gw-app1-svc` sur le port 8081
 - Exposer `gw-app2` avec le service `gw-app2-svc` sur le port 8082
@@ -175,6 +175,6 @@ Vous allez maintenant créer les objets API Gateways
 - Créer un **HTTPRoute** `gw-app-routes`  utilisant le Gateway `central-gateway` pour router le trafic vers les services (backend)
   - Path `/app1/` doit router vers le service `gw-app1-svc`
   - Path `/app2/` doit router vers le service `gw-app2-svc`
-  - Utiliser le **hostname** : `gw.formatio.cka`
+  - Utiliser le **hostname** : `gw.formation.cka`
 
 - Lister/Ecrire  les services dans le namespace `tigera-gateway`  dans `/opt/cka-gw-calico.txt`
