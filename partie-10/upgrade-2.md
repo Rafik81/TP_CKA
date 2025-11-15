@@ -1,4 +1,4 @@
-# Upgrade & Join Node
+## Upgrade & Join Node  - Troubleshooting
 
 ## Preparation
 
@@ -22,4 +22,6 @@ Le node `k8s-node-upgrade-worker2` utilise une version plus ancienne de Kubernet
 - Vérifier que le  node a rejoint  le cluster, avec la version attendue et est `READY`
 
 
-**SI vous avez une erreur** `[ERROR SystemVerification]: failed to parse kernel config: unable to load kernel module: "configs", output: "modprobe: FATAL: Module configs not found in directory /lib/modules/6.14.0-29-generic\n", err: exit status 1`   avec une commande  **kubeadm**, ajoutez le falg `--ignore-preflight-errors=SystemVerification` à votre commande
+**SI vous avez une erreur** `[ERROR SystemVerification]: failed to parse kernel config: unable to load kernel module: "configs", output: "modprobe: FATAL: Module configs not found in directory /lib/modules/6.14.0-29-generic\n", err: exit status 1`   avec une commande  **kubeadm**, 
+
+Ajouter le flag `--ignore-preflight-errors=SystemVerification` à votre commande

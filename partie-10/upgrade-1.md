@@ -5,7 +5,7 @@
 
 ```shell
 
-rm -f cka-upgrade-2.sh
+rm -f cka-upgrade-1.sh
 wget https://gitlab.enoks.fr/pub/scripts/-/raw/master/scripts/cka-upgrade-1.sh
 bash cka-upgrade-1.sh
 
@@ -42,4 +42,4 @@ La version **actuelle**  du cluster est `v1.32.5`.
 
 - Mettez à jour `kubelet`, `kubectl` sur l'ensemble des nodes, n'oublier pas de restart kubelet
 
-- **Vérifier que votre cluster et tous ses nodes sont bien à la version attentude**
+- **Vérifier que votre cluster et tous ses nodes sont bien à la version attendue**

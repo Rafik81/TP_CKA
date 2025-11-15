@@ -27,7 +27,7 @@ Utiliser le contexte `kubectl config use-context kind-back-rest`
 
 - Créez ensuite dans le namespace `default` le pod `etcd-before-restore` avec `nginx:1.29-alpine`
 
-- Enfin, restaurez la sauvegarde, danvérifiez que le cluster fonctionne toujours et que le pod créé n'est plus présent.
+- Enfin, restaurez la sauvegarde, vérifiez que le cluster fonctionne toujours et que le pod créé n'est plus présent.
 
 
 
@@ -49,7 +49,7 @@ Utiliser le contexte `kubectl config use-context kind-back-rest`
   
 - Modifier le manifest `etcd.yaml` en accord avec la restauration effectuée
   
-- Démarrer l'ensemble des pods précedemment arrêtés
+- Démarrer l'ensemble des pods précédemment arrêtés
 
 - Vérifier que:
   - le cluster est toujours fonctionnel
