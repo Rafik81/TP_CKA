@@ -33,4 +33,5 @@ spec:
             port: 8800
           initialDelaySeconds: 15
           periodSeconds: 10
+          failureThreshold: 1
 EOF
