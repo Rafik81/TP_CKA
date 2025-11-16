@@ -143,12 +143,12 @@ cat <<EOF | kubectl apply -f -
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: my-pv-cka
+  name: my-pod-cka
 spec:
   accessModes:
   - ReadWriteOnce
   capacity:
-    storage: 100Mi
+    storage: 92Mi
   hostPath:
     path: /mnt/data
     type: ""
@@ -167,10 +167,10 @@ spec:
   - ReadWriteMany
   resources:
     requests:
-      storage: 100Mi
+      storage: 92Mi
   storageClassName: standard
   volumeMode: Filesystem
-  volumeName: my-pv-cka
+  volumeName: my-pod-cka
 EOF
 
 cat <<EOF | kubectl apply -f -
