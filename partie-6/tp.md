@@ -38,7 +38,7 @@ Utiliser le contexte `kubectl config use-context kind-k8s-c2-ac`
 - Créer le pod `check-ip`dans le namespace `default`avec `httpd:2.4.65-alpine`
 - Exposer le sur le port 80 en tant que service ClusterIP nommé `check-ip-service`
 
-- Quel est le Service CIDR actuel du cluster ? Ecrire la valeur dans `/opt/cka/svc-cidr.txt`
+- Quel est le Service CIDR actuel du cluster ? Écrire la valeur dans `/opt/cka/svc-cidr.txt`
 
 
 
@@ -58,7 +58,7 @@ Utiliser le contexte: `kubectl config use-context  kind-k8s-no-cni`
 
 - Vérifier `kube-proxy` tournent sur l'ensemble des nodes et qu'il utilise iptables. Utilise `crictl ps` pour cela
 
-- Ecrire les règles iptables de tous les nodes crées pour le service `p2-service` dans `/opt/cka/iptables.txt`
+- Écrire les règles iptables de tous les nodes crées pour le service `p2-service` dans `/opt/cka/iptables.txt`
 
 
 ## 5. DNS - replicaSets
@@ -177,4 +177,4 @@ Vous allez maintenant créer les objets API Gateways
   - Path `/app2/` doit router vers le service `gw-app2-svc`
   - Utiliser le **hostname** : `gw.formation.cka`
 
-- Lister/Ecrire  les services dans le namespace `tigera-gateway`  dans `/opt/cka-gw-calico.txt`
+- Lister/Écrire  les services dans le namespace `tigera-gateway`  dans `/opt/cka-gw-calico.txt`

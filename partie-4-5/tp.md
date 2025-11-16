@@ -61,9 +61,9 @@ Utiliser le contexte: `kubectl config use-context kind-k8s-c1-h`
 
 > **Consignes**
 
-- Ecrire dans le fichier `/opt/tcka/find-pods.sh`  la commande `kubectl`  qui permet de lister tous les pods du cluster en les triant(sort) par leur âge: `metadata.creationTimestamp`
+- Écrire dans le fichier `/opt/cka/find-pods.sh`  la commande `kubectl`  qui permet de lister tous les pods du cluster en les triant(sort) par leur âge: `metadata.creationTimestamp`
 
-- Ecrire dans  `/opt/tcka/find-pods-uid.sh` la commande `kubectl` qui les liste tous mais en triant cette fois avec le champ `metadata.uid`
+- Écrire dans  `/opt/cka/find-pods-uid.sh` la commande `kubectl` qui les liste tous mais en triant cette fois avec le champ `metadata.uid`
 
 
 
@@ -73,7 +73,7 @@ Utiliser le contexte/cluster **kubeadm** `kubeadm-cluster-formation`
 
 > **Consignes**
 
-Ecrire la commande `kubectl`
+Écrire la commande `kubectl`
 
 - pour afficher l'usage de ressources des nodes `/opt/cka/node.sh`
 - pour afficher l'usage de ressources des pods et leurs containers `/opt/cka/pod.sh`
@@ -163,7 +163,7 @@ Utiliser le contexte: `kubectl config use-context kind-k8s-c3-ccc`
 - Il y a un fichier existant `/tmp/configmap-data.txt` utiliser-le pour créer un configmap nommé `configmap-pod-cm`
   - Monter le en tant que volume(nom: `cm-data`) en **readonly**  sur `/tmp/cm-data` du pod
 
-- Créer un confimap nommé `cmap2` avec les données suivantes: `formation=intensive` et `jour=1`
+- Créer un confiMap nommé `cmap2` avec les données suivantes: `formation=intensive` et `jour=1`
   - Monter le en tant que volume nommé `cmap-2` **mais uniquement** la clé `formation` en tant que fichier `/tmp/formation.txt` dans le pod
 
 
@@ -173,7 +173,7 @@ Utiliser le contexte: `kubectl config use-context kind-k8s-c2-ac`
 
 > **Consignes**
 
-- Créer un cronjob nommé `cdt-monitor` avec l'image `curlimages/curl`  qui chaque 4h  fait une requete sur `https://github.com`
+- Créer un cronjob nommé `cdt-monitor` avec l'image `curlimages/curl`  qui chaque 4h  fait une requête sur `https://github.com`
 - Créer un job `oneshot-cdt-monitor` à partir du cronjob `cdt-monitor`
 
 - Vérifier que le kob est **Completed**
@@ -197,7 +197,7 @@ Ensuite:
 
 - Update: upgrader la version de l'image à `nginx:1.29.1-alpine`
 
-- Quelle est la valeur(le numéro) de révision actuelle du deployement ? stocker la dans `/opt/cka/revision.txt`
+- Quelle est la valeur(le numéro) de révision actuelle du deployment ? stocker la dans `/opt/cka/revision.txt`
 
 - A l'aide de `kubectl` sans éditer le yaml, revenez(rollback) à la  **revision** `1`
 
@@ -212,10 +212,10 @@ Utiliser le contexte `kubectl config use-context kind-k8s-c2-ac`
 
 Dans le namespace `cka-rolling` créer le deployment `rolling-app` avec **4 replicas** en utilisant  `nginx:1.29-alpine`
 
-- Quelle est le type de la stratégie de mise à jour de ce deployment ? Quelle est la valeur de `max Surge` ? Ecrire les réponses dans `/opt/cka/strategie.txt`
+- Quelle est le type de la stratégie de mise à jour de ce deployment ? Quelle est la valeur de `max Surge` ? Écrire les réponses dans `/opt/cka/strategie.txt`
 
 - Mettre à jour le deployment pour passer `max surge` à **1** et `max unvailable` à **1**
 
 
 - Mettre à jour(update) le deployment avec `nginx:1.29.1-alpine` en utilisant `kubectl set`
-  - Ecrire dans `/opt/cka/roll-kubectl-set.txt`  la command utilisée
+  - Écrire dans `/opt/cka/roll-kubectl-set.txt`  la command utilisée

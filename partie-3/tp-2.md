@@ -104,5 +104,5 @@ Connecter-vous au node Master `master-1`
 
 - Utiliser la commande `kubeadm` pour également lister la durée et confirmez que les deux méthodes retournent le même résultat
 
-- Ecrire dans `/opt/cka/kubeadm-renew-certs.sh` la commande pour renouveler le certificat de `kube-apiserver` . Ne pas renouveler le certificat
+- Écrire dans `/opt/cka/kubeadm-renew-certs.sh` la commande pour renouveler le certificat de `kube-apiserver` . Ne pas renouveler le certificat
 

@@ -1,13 +1,15 @@
 # Troubleshooting
 
-## 1. Cluster Event Logging
+**Attention** le `setup`de la **question 5** est utilisée pour beaucoup d'autres questions.
+Donc même si vous ne souhaitez pas faire la question 5, il faut au moins faire son setup !
 
+## 1. Cluster Event Logging
 
 Utiliser le contexte `kubectl config use-context kind-k8s-c1-h`
 
 > **Consignes**
 
-- Ecrire dans `/opt/cka/cluster_events.sh` la commande qui affiche les derniers events du cluster entier, classé/trié en fonction du temps(time)
+- Écrire dans `/opt/cka/cluster_events.sh` la commande qui affiche les derniers events du cluster entier, classé/trié en fonction du temps(time)
 
 - Tuer/kill le pod `kube-proxy` qui tourne sur le worker2 `xx-worker2` et stocker les events dans `/opt/cka/container_kill.log`
 
@@ -22,17 +24,17 @@ Utiliser le contexte `kubectl config use-context kind-k8s-c1-h`
 
 Utiliser la commande `crictl` 
 
-- Ecrire l' `ID` du container et le `info.runtimeType` dans `/opt/cka/pod-container.txt`
-- Ecrire les logs du  container dans  `/opt/cka/pod-container.log`
+- Écrire l' `ID` du container et le `info.runtimeType` dans `/opt/cka/pod-container.txt`
+- Écrire les logs du  container dans  `/opt/cka/pod-container.log`
 
 
-## 3. Fix node Worker
+## 3. Fix Worker Node
 
 Utiliser le contexte `kubectl config use-context kind-k8s-c2-ac`
 
 > **Setup**
 
-- Choisir et se connecter sur un node Worker
+- S connecter sur le node Worker `k8s-c2-ac-worker`
 - **Depuis ce node**, télécharger et exécuter ce script - **ne pas regarder le contenu**
 
 ```shell
@@ -45,23 +47,23 @@ exit
 ```
 
 - Sortir  du node
-- Vérifier que le node passe en `notReady` après qq temps
+- Vérifier que le node passe en `notReady` après quelques temps
 
 > **Consignes**
   
 Il semble y avoir un soucis avec l'un des node qui est `notReady`:
 
 - Fixer le problème pour que le node soit disponible et puisse accueillir de nouveaux pods
-- Ecrire la raison/cause du problème dans `/opt/cka/reason.txt`
+- Écrire la raison/cause du problème dans `/opt/cka/reason.txt`
 
-## 4. Pod issue
+## 4. Pod Issue
 
-Utiliser le contexte `kubectl config use-context kind-k8s-c2-ac`
+Utiliser le contexte `kubectl config use-context kind-k8s-c1-h`
 
 > **Setup**
 
 ```shell
-kubectl config use-context kind-k8s-c2-ac
+kubectl config use-context kind-k8s-c1-h
 
 rm -f set-2.sh
 curl https://gitlab.enoks.fr/pub/tp-cka/-/raw/master/partie-9/set-2.sh -O
@@ -72,18 +74,18 @@ bash set-2.sh
 
 > **Consignes**
 
-Un deployment nommé  `failing-app` est présent dans le namespace `cka-pod-error` mais ses pods ne sont pas en `Runnning`
+Un deployment nommé  `failing-app` est présent dans le namespace `cka-pod-error` mais ses pods ne sont pas en `Running`
 
 Fixer/corriger les problèmes suivants:
 
-- Les pods sont en erreur à cause d'une insuffisance de `memory`, passer la limite `256Mi`
+- Les pods sont en erreur (Restart/CrashLoopBackOff) à cause d'une insuffisance de `memory`, passer la limite `256Mi`
 - Le port du container doit être `80`
 - Le LivenessProbe doit passer en succès pour que les pods puissent être Running
 
-Vérifier que tous les pods sont en `Running`après le fix et qu'il n y **aucun** `restart` des pods au bout de `+-30s` ni après
+Vérifier que tous les pods sont en `Running`après le fix et qu'il n y **aucun** `restart` des pods
 
 
-## 5. Deployment issue
+## 5. Deployment Issue
 
 Utiliser le contexte `kubectl config use-context  kind-k8s-no-cni`
 
@@ -130,7 +132,7 @@ spec:
           cpu: "10m"
 ```
 
-- Ecrire la cause/raison dans /opt/cka/failed-manifest.txt
+- Écrire le message d'erreur dans /opt/cka/failed-manifest.txt
 - Corriger pour que le pod tourne
 
 ## 7. Redis Pod Issue
@@ -204,17 +206,18 @@ Utiliser le contexte `kubectl config use-context  kind-k8s-no-cni`
 Dans le namespace `my-pod-cka`, fixez le pod `my-pod-cka`
 
 
-## 11. Taint - not an issue
+## 11. Taint - Not An Issue
 
 Utiliser le contexte `kubectl config use-context kind-k8s-c2-ac`
 
 > **Consignes**
 
-- Tainter le node **worker** avec la key `node-role/infra` et valeur `true` , effect `NoSchedule`
-- Dans le namespace `default`, créer le pod `taint-toleration`avec l'image `nginx:1.29-alpine`, Assurez-vous que le pod ne reste pas bloqué en `Pending`
+- Ajouter un Taint le node **worker** avec la key `node-role/infra` et valeur `true` , effect `NoSchedule`
+
+- Dans le namespace `default`, créer le pod `taint-toleration` avec l'image `nginx:1.29-alpine`, Assurez-vous que le pod ne reste pas bloqué en `Pending`
 
 
-## 12. Deployement Issue - postgres
+## 12. Deployment Issue - Postgres
 
 Utiliser le contexte `kubectl config use-context  kind-k8s-no-cni`
 
@@ -239,12 +242,15 @@ bash set-4.sh
 
 # sortir du node
 exit
+
+# lancer
+k taint node k8s-c2-ac-worker   node-role/infra=true:NoSchedule- 2> /dev/null
 ```
 
 > **Consignes**
 
 - Créer le pod `another-deb-pod` avec `kubectl create deploy another-deb-pod --image nginx:1.29-alpine --replicas=1`
-- Aucun pod du du deployment ne tourne, UP-TO-DATE=0  et READY 0/1
+- Constater qu'aucun pod du deployment ne tourne, UP-TO-DATE=0  et READY 0/1
 - Sans supprimer ni modifier le deployment, fixer le problème afin qu'il puisse avoir un pod en Running
 
 
@@ -255,25 +261,16 @@ Utiliser le contexte `kubectl config use-context  kind-k8s-no-cni`
 
 > **Setup**
 
-Si vous n'avez pas faire la question le setup indiqué à question **5**, merci de le faire ici avant de l'exercice
-
-```shell
-kubectl config use-context  kind-k8s-no-cni
-
-rm -f set-3.sh
-curl https://gitlab.enoks.fr/pub/tp-cka/-/raw/master/partie-9/set-3.sh -O
-bash set-3.sh
-
-```
+**Si vous n'avez pas faire le setup de la question 5**, merci de le faire avant/d'abord
 
 > **Consignes**
 
-Dans le namespace `kubectl create ns failed-cron-job`,  se trouve un CronJob `cka-failed-cronjob` censé s'exécuter chaque **2 minutes** pour vérifier que le pod `cka-cron-pod` exposé (en théorie) via le service `cka-cron-svc` est bien UP
+Dans le namespace `failed-cron-job`,  se trouve un CronJob `cka-failed-cronjob` censé s'exécuter chaque **2 minutes** pour vérifier que le pod `cka-cron-pod` exposé (en théorie) via le service `cka-cron-svc` est bien UP
 
 Les pods associés au jobs de ce cronjob sont en **erreur**
 
 - Fixez le problème afin que le pod du job puisse être Completed
 
-- Faites un get sur le pod `Completed` et stocker l'output dans `/opt/cka/cron-completedt.txt`
+- Faites un get sur le pod `Completed` et stocker l'output dans `/opt/cka/cron-completed.txt`
 
 - Supprimer le cronjob
