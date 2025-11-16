@@ -31,7 +31,9 @@ spec:
           httpGet:
             path: /
             port: 8800
-          initialDelaySeconds: 15
-          periodSeconds: 10
+          initialDelaySeconds: 5
+          periodSeconds: 5
           failureThreshold: 1
 EOF
+
+sleep 10
