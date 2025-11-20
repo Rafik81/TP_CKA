@@ -69,7 +69,17 @@ Utiliser le contexte: `kubectl config use-context kind-k8s-c1-h`
 
 ## 5. Kubectl - Resource Usage
 
-Utiliser le contexte/cluster **kubeadm** `kubeadm-cluster-formation`
+Utiliser le contexte: `kubectl config use-context kind-k8s-c1-h`
+
+- Appliquer ce manifest: `kubectl apply -f https://gitlab.enoks.fr/pub/tp-cka/-/raw/master/partie-3/metric-server.yaml`
+
+Vérifier/attendre que le deploy soit `READY 1/1`
+
+```shell
+k -n kube-system get deployment.apps/metrics-server
+NAME             READY   UP-TO-DATE   AVAILABLE   AGE
+metrics-server   1/1     1            1           43s
+```
 
 > **Consignes**
 

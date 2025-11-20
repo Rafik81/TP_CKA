@@ -75,7 +75,7 @@ Pour vous connecter à node de ce cluster utiliser `sudo dssh <node>`
 
 - Créer un service de type NodePort pour exposer le pod  sur le port 80
   - Vérifier que le service crée a bien un endpoint dont l'IP correspond  au internal IP du controlPlane
-  - Connectez-vous au node pour vérifier que le port 80 répond bien
+  - Faites un Curl pour vérfier que le service NodePort fonctionne: `curl http://<IP-NODE>:<nodePort>`
 
 
 ## 5. Kubelet client/server cert info
