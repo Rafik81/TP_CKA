@@ -16,7 +16,7 @@ Vous avez accès à **plusieurs clusters** depuis votre terminal principal via l
 
 > **Consignes**
 
-Connectez-vous au node `master-1` du cluster `kubernetes` **kubeadm-formation**(cluster crée avec kubeadm). Utiliser le `ssh` normal pour la connexion
+Connectez-vous au node `master-1` du cluster `kubernetes` **kubeadm-formation**(si cluster crée avec kubeadm) ou le cluster `k8s-c1-h` : `kubectl config use-context kind-k8s-c1-h`
 
 - vérifiez comment les composants kubelet, kube-apiserver, kube-scheduler, kube-controller-manager et etcd sont démarrés/installés
 -  Recherchez également le nom de l'application DNS et comment elle est démarrée/installée 
@@ -93,7 +93,7 @@ Trouver la valeur du  `Issuer` et `Extended Key Usage` sur ce node pour:
 
 ## 6. Validité des certificats
 
-Utiliser le contexte/cluster **kubeadm** `kubeadm-cluster-formation`
+Utiliser le contexte `kubectl config use-context kind-k8s-c1-h`
 
 
 > **Consignes**
