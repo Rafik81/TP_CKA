@@ -140,7 +140,7 @@ Utiliser le contexte: `kubectl config use-context  kind-k8s-no-cni`
   - `wget -qO- http://dns-web-svc.dns-test.svc.cluster.local`
 
 
-## 9. API Gateway
+## 10. API Gateway
 
 Utiliser le contexte: `kubectl config use-context  kind-k8s-no-cni`
 
