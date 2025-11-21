@@ -206,7 +206,7 @@ Vérifier que ces deux pods peuvent joindre le pod `vault`sur le port 8080. En f
 - Vérifier que le pod `pod-allow`  a toujours accès et pas le `pod-deny`
 
 
-## LimitRange - Quota
+## 7. LimitRange - Quota
 
 Utiliser le contexte `kubectl config use-context kind-k8s-c3-ccc`
 

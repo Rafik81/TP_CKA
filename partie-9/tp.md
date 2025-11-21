@@ -17,7 +17,7 @@ Utiliser le contexte `kubectl config use-context kind-k8s-c1-h`
 
 Utiliser le contexte `kubectl config use-context kind-k8s-c1-h`
 
-> Consignes**
+> **Consignes**
 
 - Dans le namespace `debug-pod` créer le pod `tigers-reunite` avec  l'image `httpd:2.4.65-alpine` et les labels `pod=container` et ` container=pod`
 - Identifier sur quel node, tourne le pod et aller sur le node en utilisant `dssh`
