@@ -5,18 +5,15 @@ rm -f install-docker-kind.sh
 wget https://gitlab.enoks.fr/pub/scripts/-/raw/master/scripts/install-docker-kind.sh
 sudo bash install-docker-kind.sh
 
+# Donner les permissions à <votre-user-normal> : non-root 
 usermod -aG docker <le-user-normal>
 
 # Vérifier que le user normal, non-root a accès à Docker
 newgrp docker  # ou reboot la machine
 docker run hello-world
-
-wget https://gitlab.enoks.fr/pub/scripts/-/raw/master/scripts/dssh.sh
-chmod +x dssh.sh
-sudo mv dssh.sh /usr/local/bin/dssh
 ```
 
-> **A faire avec le user normal**
+> **A faire avec <votre-user-normal>**
 
 
 ```shell
