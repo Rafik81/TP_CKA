@@ -18,10 +18,10 @@ Vous avez accès à **plusieurs clusters** depuis votre terminal principal via l
 
 Connectez-vous au node `master-1` du cluster `kubernetes` **kubeadm-formation**(si cluster crée avec kubeadm) ou le cluster `k8s-c1-h` : `kubectl config use-context kind-k8s-c1-h`
 
-- vérifiez comment les composants kubelet, kube-apiserver, kube-scheduler, kube-controller-manager et etcd sont démarrés/installés
+- vérifiez comment les composants `kubelet`, `kube-apiserver`,  `kube-scheduler`, `kube-controller-manager` et `etcd` sont démarrés/installés
 -  Recherchez également le nom de l'application DNS et comment elle est démarrée/installée 
   
-**Ecrivez** vos réponses ur le Helper dans le fichier `/opt/cka/master-components.txt` comme ceci
+**Écrivez** vos réponses ur le Helper dans le fichier `/opt/cka/master-components.txt` comme ceci
 
 ```shell
 kubelet: [TYPE]
@@ -54,7 +54,6 @@ Trouvez les informations suivantes concernant le cluster `kind-k8s-c1-h` :
 Écrivez vos réponses dans le fichier `/opt/cka/cluster-info`, en respectant la structure suivante :
 Pour vous connecter à node de ce cluster utiliser `sudo dssh <node>`
 
-# /opt/cka/cluster-info
 
 ```shell
 1 : [RÉPONSE]
@@ -93,7 +92,7 @@ Trouver la valeur du  `Issuer` et `Extended Key Usage` sur ce node pour:
 
 ## 6. Validité des certificats
 
-Utiliser le contexte `kubectl config use-context kind-k8s-c1-h`
+- Utiliser le contexte `kubectl config use-context kind-k8s-c1-h`
 
 
 > **Consignes**
@@ -106,3 +105,40 @@ Connecter-vous au node Master `master-1`
 
 - Écrire dans `/opt/cka/kubeadm-renew-certs.sh` la commande pour renouveler le certificat de `kube-apiserver` . Ne pas renouveler le certificat
 
+
+## 7. Authorization Mode - Admission Plugins - `kube-apiserver`
+
+
+- Utiliser ce contexte pour l'exercice: `kubectl config use-context kind-k8s-c2-ac`
+
+
+> **Consignes** 
+
+- Identifier le ou les modes d' `Authorization`  activé sur le cluster (`kube-apiserver`)
+- Identifier les plugins  d'admission  activés sur `kube-apiserver`
+
+
+Écrivez vos réponses dans le fichier `/opt/cka/api-auth-info`
+
+```yaml
+Mode:  <votre réponse>
+Plugins: <votre réponse>
+```
+
+
+## 8. Authorization Mode - Admission Plugins - `kubelet` 
+
+- Utiliser le contexte `kubectl config use-context kind-k8s-c1-h`
+
+
+> **Consignes** 
+
+- Identifier le ou les modes d' `Authorization`  configuré sur le `kubelet`
+- Identifier les méthodes d'authentification  activées sur `kubelet`
+
+Écrivez vos réponses dans le fichier `/opt/cka/kubelet-auth-info`
+
+```yaml
+Authentication:  <votre réponse 1, 2, 3>
+Mode: <votre réponse 1, 2, 3>
+```

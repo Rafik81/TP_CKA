@@ -142,13 +142,13 @@ Utiliser le contexte: `kubectl config use-context  kind-k8s-no-cni`
 
 ## 10. API Gateway
 
-Utiliser le contexte: `kubectl config use-context  kind-k8s-no-cni`
+- Utiliser le contexte: `kubectl config use-context  kind-k8s-no-cni`
 
-API GATEWAY DOC: [https://gateway-api.sigs.k8s.io/guides/](https://gateway-api.sigs.k8s.io/guides/)
+- Gateway API  DOC: [https://gateway-api.sigs.k8s.io/guides/](https://gateway-api.sigs.k8s.io/guides/)
 
 > **Consignes**
 
-- Installer/Activer les CRD Api Gateway
+- Installer/Activer les CRDs  Gateway API
   
 ```shell
 kubectl apply -f - <<EOF
@@ -178,3 +178,31 @@ Vous allez maintenant créer les objets API Gateways
   - Utiliser le **hostname** : `gw.formation.cka`
 
 - Lister/Écrire  les services dans le namespace `tigera-gateway`  dans `/opt/cka-gw-calico.txt`
+
+> **Ingress -> HTTPRoute**
+
+- Convertissez la ressource  `ingress` ci-dessous en son equivalent `HTTPRoute` dans le fichier `/opt/cka/httproute.yaml`
+  - utiliser la Gateway `central-gateway`
+  - créer le ressource HTTRoute en applicant `/opt/cka/httproute.yaml`
+
+
+```yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: public-app-access
+  namespace: public-app
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: gw-public-app.cka
+    http:
+      paths:
+      - backend:
+          service:
+            name: public-app-svc
+            port:
+              number: 80
+        path: /
+        pathType: Prefix
+```

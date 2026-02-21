@@ -233,5 +233,4 @@ NAME                          READY   STATUS    RESTARTS   AGE
 kube-scheduler-master1   1/1     Running   0          36s
 kube-scheduler-master2   1/1     Running   0          3h10m
 kube-scheduler-master3   1/1     Running   0          3h7m
-
 ```
