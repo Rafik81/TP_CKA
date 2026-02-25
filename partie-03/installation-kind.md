@@ -6,14 +6,14 @@ wget https://gitlab.enoks.fr/pub/scripts/-/raw/master/scripts/install-docker-kin
 sudo bash install-docker-kind.sh
 
 # Donner les permissions à <votre-user-normal> : non-root 
-usermod -aG docker <le-user-normal>
+usermod -aG docker ambient-user
 
 # Vérifier que le user normal, non-root a accès à Docker
 newgrp docker  # ou reboot la machine
 docker run hello-world
 ```
 
-> **A faire avec <votre-user-normal>**
+> **A faire avec <votre-user-normal>**, le  `NON-ROOT`
 
 
 ```shell

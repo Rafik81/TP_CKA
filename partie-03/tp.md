@@ -2,7 +2,7 @@
 
 ## 1. Contexts
 
-Vous avez accès à **plusieurs clusters** depuis votre terminal principal via les contextes kubectl. 
+Vous avez accès à **plusieurs clusters** depuis votre terminal principal via les **contextes kubectl**. 
 
 > **Consignes**
 
@@ -16,7 +16,7 @@ Vous avez accès à **plusieurs clusters** depuis votre terminal principal via l
 
 > **Consignes**
 
-Connectez-vous au node `master-1` du cluster `kubernetes` **kubeadm-formation**(si cluster crée avec kubeadm) ou le cluster `k8s-c1-h` : `kubectl config use-context kind-k8s-c1-h`
+Connectez-vous au node `master-1` au cluster `k8s-c1-h` : `kubectl config use-context kind-k8s-c1-h`
 
 - vérifiez comment les composants `kubelet`, `kube-apiserver`,  `kube-scheduler`, `kube-controller-manager` et `etcd` sont démarrés/installés
 -  Recherchez également le nom de l'application DNS et comment elle est démarrée/installée 
@@ -63,6 +63,7 @@ Pour vous connecter à node de ce cluster utiliser `sudo dssh <node>`
 5 : [RÉPONSE]
 ```
 
+
 ## 4. Créer un pod statique & service
 
 
@@ -74,7 +75,7 @@ Pour vous connecter à node de ce cluster utiliser `sudo dssh <node>`
 
 - Créer un service de type NodePort pour exposer le pod  sur le port 80
   - Vérifier que le service crée a bien un endpoint dont l'IP correspond  au internal IP du controlPlane
-  - Faites un Curl pour vérfier que le service NodePort fonctionne: `curl http://<IP-NODE>:<nodePort>`
+  - Faites un Curl pour vérifier que le service NodePort fonctionne: `curl http://<IP-NODE>:<nodePort>`
 
 
 ## 5. Kubelet client/server cert info
@@ -89,6 +90,7 @@ Trouver la valeur du  `Issuer` et `Extended Key Usage` sur ce node pour:
 
 1. `kubelet client certificate`, celui utilisé pour les connexions sortantes vers le serveur kube-apiserver.
 2. `kubelet server certificate`, celui utilisé pour les connexions entrantes provenant du serveur kube-apiserver.
+
 
 ## 6. Validité des certificats
 

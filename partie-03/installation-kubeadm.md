@@ -1,28 +1,8 @@
 # Installation Cluster
 
-**INSTALLATION DE CLUSTER KUBEADM SUR DAAS - A SKIPPER POUR UN TRVAIL EN FULL LOCAL**
-
-## Clean Up
-
-Pour ceux qui ont déjà un cluster Kubernetes existant, il faut reset les VMS
-
-> **Cleanup des anciennes VMs**
-
-```shell
-rm -rf cleanup-node.sh
-wget https://gitlab.enoks.fr/pub/scripts/-/raw/master/scripts/cleanup-node.sh
-sudo bash cleanup-node.sh
-```
-
-> **CleanUp VM helper**
+**INSTALLATION DE CLUSTER KUBEADM SUR DAAS - A SKIPPER POUR UN TRA VAIL EN FULL LOCAL**
 
 
-```shell
-apt remove -y haproxy
-rm -rf /etc/haproxy
-systemctl daemon-reload
-rm -rf ~/admin.conf /home/ambient-user/admin.conf
-```
 
 
 ## Setup des futurs nodes du cluster
@@ -173,15 +153,15 @@ CILIUM_VERSION=v1.17.3
 cilium install  --version ${CILIUM_VERSION} --set ipam.operator.clusterPoolIPv4PodCIDRList="172.20.0.0/16"
 cilium status --wait
 
-k -n  kube-system get no,po
+kubectl -n  kube-system get no,po
 ```
 
 ## Installer Metrics-Server
 
 ```shell
-kubectl apply -f https://gitlab.enoks.fr/pub/tp-cka/-/raw/master/partie-3/metric-server.yaml
+kubectl apply -f https://gitlab.enoks.fr/pub/tp-cka/-/raw/master/partie-03/metric-server.yaml
 
-k -n kube-system get po -l k8s-app=metrics-server
+kubectl -n kube-system get po -l k8s-app=metrics-server
 NAME                              READY   STATUS    RESTARTS   AGE
 metrics-server-576c8c997c-9nscm   1/1     Running   0          10m
 
@@ -202,7 +182,7 @@ k top nodes
 
 ```shell
 # verifier que vous avez bien 3 pods kube-scheduler
-k get po -n kube-system -l component=kube-scheduler
+kubectl get po -n kube-system -l component=kube-scheduler
 NAME                          READY   STATUS    RESTARTS   AGE
 kube-scheduler-master1   1/1     Running   0          3h22m
 kube-scheduler-master2   1/1     Running   0          3h5m
@@ -228,7 +208,7 @@ mv ../kube-scheduler.yaml .
 # S'il met du temps
 systemctl restart kubelet
 
-k get po -n kube-system -l component=kube-scheduler
+kubectl get po -n kube-system -l component=kube-scheduler
 NAME                          READY   STATUS    RESTARTS   AGE
 kube-scheduler-master1   1/1     Running   0          36s
 kube-scheduler-master2   1/1     Running   0          3h10m

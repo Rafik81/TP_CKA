@@ -39,7 +39,7 @@ Utiliser le contexte `kubectl config use-context kind-k8s-c2-ac`
 
 ```shell
 rm -f set-1.sh
-curl https://gitlab.enoks.fr/pub/tp-cka/-/raw/master/partie-9/set-1.sh -O
+curl https://gitlab.enoks.fr/pub/tp-cka/-/raw/master/partie-09/set-1.sh -O
 bash set-1.sh
 systemctl daemon-reload
 # sortir du node
@@ -66,7 +66,7 @@ Utiliser le contexte `kubectl config use-context kind-k8s-c1-h`
 kubectl config use-context kind-k8s-c1-h
 
 rm -f set-2.sh
-curl https://gitlab.enoks.fr/pub/tp-cka/-/raw/master/partie-9/set-2.sh -O
+curl https://gitlab.enoks.fr/pub/tp-cka/-/raw/master/partie-09/set-2.sh -O
 bash set-2.sh
 
 ```
@@ -95,7 +95,7 @@ Utiliser le contexte `kubectl config use-context  kind-k8s-no-cni`
 kubectl config use-context  kind-k8s-no-cni
 
 rm -f set-3.sh
-curl https://gitlab.enoks.fr/pub/tp-cka/-/raw/master/partie-9/set-3.sh -O
+curl https://gitlab.enoks.fr/pub/tp-cka/-/raw/master/partie-09/set-3.sh -O
 bash set-3.sh
 
 ```
@@ -237,7 +237,7 @@ Utiliser le contexte `kubectl config use-context kind-k8s-c2-ac`
 
 ```shell
 rm -f set-4.sh
-curl https://gitlab.enoks.fr/pub/tp-cka/-/raw/master/partie-9/set-4.sh -O
+curl https://gitlab.enoks.fr/pub/tp-cka/-/raw/master/partie-09/set-4.sh -O
 bash set-4.sh
 
 # sortir du node

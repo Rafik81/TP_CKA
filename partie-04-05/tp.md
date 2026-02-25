@@ -5,7 +5,7 @@ Sur la machine/VM Kind, exécuter le fichier script `prepare.sh` avec le **user 
 
 ```shell
 rm -f prepare.sh
-wget https://gitlab.enoks.fr/pub/tp-cka/-/raw/master/partie-4-5/prepare.sh
+wget https://gitlab.enoks.fr/pub/tp-cka/-/raw/master/partie-04-05/prepare.sh
 
 bash prepare.sh
 ```
@@ -71,22 +71,17 @@ Utiliser le contexte: `kubectl config use-context kind-k8s-c1-h`
 
 Utiliser le contexte: `kubectl config use-context kind-k8s-c1-h`
 
-- Appliquer ce manifest: `kubectl apply -f https://gitlab.enoks.fr/pub/tp-cka/-/raw/master/partie-3/metric-server.yaml`
-
-Vérifier/attendre que le deploy soit `READY 1/1`
-
-```shell
-k -n kube-system get deployment.apps/metrics-server
-NAME             READY   UP-TO-DATE   AVAILABLE   AGE
-metrics-server   1/1     1            1           43s
-```
-
 > **Consignes**
 
-Écrire la commande `kubectl`
 
-- pour afficher l'usage de ressources des nodes `/opt/cka/node.sh`
-- pour afficher l'usage de ressources des pods et leurs containers `/opt/cka/pod.sh`
+- A l'aide de `kubectl`, deployer le manifest YAML suivant: `https://gitlab.enoks.fr/pub/tp-cka/-/raw/master/partie-03/metric-server.yaml`
+  
+- Lister les pods  du namespace `kube-system` qui ont le label  `k8s-app=metrics-server`/ sauvegarder le output dans  `/opt/cka/metrics.txt`
+  
+Vous venez d'installer `metrics-server`, maintenant, il vous ait demandé, d'écrire  la commande `kubectl`
+
+- pour afficher l'usage de ressources des nodes dans  `/opt/cka/res-nodes.sh`
+- pour afficher l'usage de ressources des pods et leurs containers dans `/opt/cka/res-pods.sh`
 
 
 ## 6. Scheduling Manuel
@@ -107,7 +102,7 @@ Confirmer que le pod est crée mais il n'est pas schedule/placé sur un node. Aj
 - Démarrer le `kube-scheduler`
 
 
-## 7. Daemonset - sur tous les nodes
+## 7. DaemonSet - sur tous les nodes
 
 Utiliser le contexte: `kubectl config use-context kind-k8s-c1-h`
 
