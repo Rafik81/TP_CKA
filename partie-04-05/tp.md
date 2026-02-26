@@ -76,7 +76,7 @@ Utiliser le contexte: `kubectl config use-context kind-k8s-c1-h`
 
 - A l'aide de `kubectl`, deployer le manifest YAML suivant: `https://gitlab.enoks.fr/pub/tp-cka/-/raw/master/partie-03/metric-server.yaml`
   
-- Lister les pods  du namespace `kube-system` qui ont le label  `k8s-app=metrics-server`/ sauvegarder le output dans  `/opt/cka/metrics.txt`
+- Lister les pods  du namespace `kube-system` qui ont le label  `k8s-app=metrics-server` sauvegarder le output dans  `/opt/cka/metrics.txt`
   
 Vous venez d'installer `metrics-server`, maintenant, il vous ait demandé, d'écrire  la commande `kubectl`
 

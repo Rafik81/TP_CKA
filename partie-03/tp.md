@@ -16,9 +16,12 @@ Vous avez accès à **plusieurs clusters** depuis votre terminal principal via l
 
 ## 2. Collecter les information du Master
 
+
+- Utiliser ce contexte pour l'exercice: `kubectl config use-context kind-k8s-c1-h`
+  
 > **Consignes**
 
-Connectez-vous au node `master-1` au cluster `k8s-c1-h` : `kubectl config use-context kind-k8s-c1-h`
+Connectez-vous au node `k8s-c1-h-control-plane` au cluster `k8s-c1-h` avec `dssh k8s-c1-h-control-plane`
 
 - vérifiez comment les composants `kubelet`, `kube-apiserver`,  `kube-scheduler`, `kube-controller-manager` et `etcd` sont démarrés/installés
 -  Recherchez également le nom de l'application DNS et comment elle est démarrée/installée 
@@ -54,7 +57,7 @@ Trouvez les informations suivantes concernant le cluster `kind-k8s-c1-h` :
 
 
 Écrivez vos réponses dans le fichier `/opt/cka/cluster-info`, en respectant la structure suivante :
-Pour vous connecter à node de ce cluster utiliser `sudo dssh <node>`
+Pour vous connecter à node de ce cluster utiliser `dssh <node>`
 
 
 ```shell
