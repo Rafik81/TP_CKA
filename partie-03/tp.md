@@ -6,7 +6,9 @@ Vous avez accès à **plusieurs clusters** depuis votre terminal principal via l
 
 > **Consignes**
 
-- Écrivez tous **ces noms de contexte** dans `/opt/cka/contexts`. Créer le dossier `/opt/cka` s'il faut
+- Écrivez tous **ces noms de contexte** dans `/opt/cka/contexts`. Créer le dossier `/opt/cka` s'il faut. 
+  - `sudo mkdir /opt/cka && su chown -R ambient-user /opt/cka` 
+
 
 - Ensuite, écrivez une commande pour afficher le contexte actuel (current context) dans `/opt/cka/context_default_kubectl.sh`. La commande doit utiliser `kubectl`.
 - Enfin, écrivez une deuxième commande faisant la même chose dans `/opt/cka/context_default_no_kubectl.sh`, mais sans utiliser kubectl.
