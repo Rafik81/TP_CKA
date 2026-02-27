@@ -80,7 +80,7 @@ spec:
   - ReadWriteOnce
   resources:
     requests:
-      storage: 80Mi
+      storage: 124Mi
   storageClassName: standard
 EOF
 

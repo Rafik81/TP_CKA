@@ -9,7 +9,6 @@ apiVersion: kind.x-k8s.io/v1alpha4
 nodes:
   - role: control-plane
   - role: worker
-  - role: worker
 EOF
 
 kind create cluster -n back-rest --config kind-etcd.yaml
@@ -23,7 +22,7 @@ kind create cluster -n back-rest --config kind-etcd.yaml
 Utiliser le contexte `kubectl config use-context kind-back-rest` 
 
 - Effectuez une sauvegarde du `etcd` du node **Master**  et enregistrez-la sur le nœud  dans `/tmp/etcd-backup.db`
-  - Utiliser `apt update -y && apt install -y etcd-client`
+  - Utiliser `apt update -y && apt install -y etcd-client` pour installer le binaire `etcdctl` si besoin
 
 - Créez ensuite dans le namespace `default` le pod `etcd-before-restore` avec `nginx:1.29-alpine`
 
@@ -35,7 +34,7 @@ Utiliser le contexte `kubectl config use-context kind-back-rest`
 
 **Tips** : Au besoin utiliser la documentation [https://kubernetes.io/docs/tasks/administer-cluster/configure-upgrade-etcd/](https://kubernetes.io/docs/tasks/administer-cluster/configure-upgrade-etcd/)
 
-- Vérifier que le client `etcdctl`existe sinon installer le package `etcd-client`
+- Vérifier que le client `etcdctl` existe sinon installer le package `etcd-client`
   
 - Identifier les informations à utiliser pour  la connexion Etcd
   

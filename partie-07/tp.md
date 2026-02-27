@@ -33,15 +33,18 @@ Utiliser le contexte `kubectl config use-context kind-k8s-c2-ac`
 
 > **Consignes**
 
-- Créer le dossier `/tmp/pv-data`
+- Créer en local le dossier `/tmp/pv-data` avec: `mkdir -p /tmp/pv-data`
+  
 - Créer un **PersistentVolume** nommé `safari-pv` avec une capacité de `128Mi`, accessMode `ReadWriteOnce`, `hostPath` `/tmp/pv-data` et  **aucun** storageClassName défini
+
 - Vérifier que le PV a été bien créé
 
 - Lister les storageClass présents et faites en sorte **qu'aucun** ne soit le storageclass par défaut `default` , sans les supprimer
 
 - Créer le namespace `project-tiger` s'il n'existe pas
+  
 - Dans le namespace `project-tiger`, créer le **PersistentVolumeClaim** `safari-pvc` avec une capacité de `128Mi` , accessMode `ReadWriteOnce` et sans storageClassName.
-Le PVC devrait être rattaché au PV
+    - Vérification: si tout est OK, le PVC devrait être rattaché au PV: `status: Bound`
 
 
 - Créer  dans le namespace `project-tiger` le deployment `safari`  avec `httpd:2.4.65-alpine`, et monter le PVC `safari-pvc` en tant que volume nommé `data`sur `/tmp/safari-data` 
@@ -107,7 +110,8 @@ Utiliser le contexte `kubectl config use-context kind-k8s-c2-ac`
 
 > **Consignes**
 
-
+- Créer en local le dossier `/tmp/data` avec: `mkdir -p /tmp/data`
+  
 - Créer un **PersistentVolume** nommé `cka-pv` avec une capacité de `128Mi`, accessMode `ReadWriteOnce`, storageClass=standard et `hostPath` `/tmp/data`
   
 - Dans le namespace `default` créer le PersistentVolumeClaim `cka-pvc` qui hérite du PersistentVolume `cka-pv`. Une fois créer le status de  PersistentVolume `cka-pv`  doit être `Bound`
