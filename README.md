@@ -1,5 +1,22 @@
 # TP-Cka
 
+## Rate-Limiting
+
+Se connecter sur les nodes workers (à minima):
+
+`vim /etc/containerd/config.toml`
+
+Identifier la ligne `[plugins."io.containerd.grpc.v1.cri".registry.configs]` et insérer ce bloc en bas
+
+```shell
+        [plugins."io.containerd.grpc.v1.cri".registry.configs."registry-1.docker.io".auth]
+          username = "zabradocker"
+          password = "dckr_pat_xcnAbzdZ523FNwWVLy1Q_owJVR8"
+          auth = ""
+          identitytoken = ""
+```
+
+Ensuite restart **containerd** : `systemctl restart containerd`
 
 
 ## Alias
