@@ -19,8 +19,9 @@ Utiliser le contexte: `kubectl config use-context  kind-k8s-no-cni`
 - Vérifier que les nodes sont `NotReady`
 
 - Installer le CNI calico avec ces fichiers: 
-  - `https://raw.githubusercontent.com/projectcalico/calico/v3.30.3/manifests/tigera-operator.yaml`
   - `https://raw.githubusercontent.com/projectcalico/calico/v3.30.3/manifests/custom-resources.yaml`
+  - `https://raw.githubusercontent.com/projectcalico/calico/v3.30.3/manifests/tigera-operator.yaml`
+
 
 Attendez un et vérifier que
 
