@@ -1,8 +1,23 @@
-# TP-Cka
+# TP-CKA
 
 ## Rate-Limiting
 
-Se connecter sur les nodes workers (à minima):
+
+Il faut patcher le fichier `/etc/containerd/config.toml` afin d'y ajouter un credential d'authentification
+
+
+> **Avec le script**
+
+```shell
+export REGISTRY_USER="zabradocker"
+export REGISTRY_PASS="dckr_pat_xcnAbzdZ523FNwWVLy1Q_owJVR8"
+wget https://gitlab.enoks.fr/pub/scripts/-/raw/master/scripts/patch-cri.sh
+bash patch-cri.sh
+```
+
+> **Manuellement**
+
+Se connecter sur chacun des nodes concernés:
 
 `vim /etc/containerd/config.toml`
 
@@ -13,8 +28,6 @@ Insérer ce bloc en bas du fichier
         [plugins."io.containerd.grpc.v1.cri".registry.configs."registry-1.docker.io".auth]
             username = "zabradocker"
             password = "dckr_pat_xcnAbzdZ523FNwWVLy1Q_owJVR8"
-            auth = ""
-            identitytoken = ""
 ```
 
 Ensuite restart **containerd** : `systemctl restart containerd`
