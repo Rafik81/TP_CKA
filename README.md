@@ -6,7 +6,7 @@ Se connecter sur les nodes workers (à minima):
 
 `vim /etc/containerd/config.toml`
 
-Identifier la ligne `[plugins."io.containerd.grpc.v1.cri".registry.configs]` et insérer ce bloc en bas
+Insérer ce bloc en bas du fichier
 
 ```shell
     [plugins."io.containerd.grpc.v1.cri".registry]
