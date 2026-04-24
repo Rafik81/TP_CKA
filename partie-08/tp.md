@@ -66,7 +66,7 @@ Utiliser le contexte `kubectl config use-context kind-k8s-c2-ac`
 
 - Créer un  clusterrole `cka-cluster-role` avec les permissions `create`, `get`, `list` sur les deployments et les pods
 
-- Associer clusterrole `cka-cluster-role` au SA `group-custom` en utilisant le même nom
+- Créer un clusterolebinding en associant ce clusterrole `cka-cluster-role` au SA `group-custom` en utilisant le même nom
 
 
 ## 4. SecurityContext
