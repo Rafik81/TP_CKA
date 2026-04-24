@@ -96,7 +96,7 @@ Utiliser le contexte: `kubectl config use-context  kind-k8s-no-cni`
 - Créer un  deployment nommé `api` avec `nginx:1.29-alpine` et le label `app=api`
 - Créer un  deployment nommé `db` avec `postgres:13.22-alpine`, le label `app=db` et la variable environment `POSTGRES_HOST_AUTH_METHOD=trust`
 
-- Créer des  **NetworkPolicies** pour: (tips: 3)
+- Créer des  **NetworkPolicies** pour: (au moins 3)
    - Autoriser web à communiquer uniquement avec api
    - Autoriser api à communiquer uniquement avec db
    - Tout le reste du trafic avec les autres pods est bloqué
