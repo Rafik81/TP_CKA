@@ -34,7 +34,7 @@ Utiliser le contexte `kubectl config use-context kind-k8s-c2-ac`
 
 > **Setup**
 
-- S connecter sur le node Worker `k8s-c2-ac-worker`
+- Se connecter sur le node Worker `k8s-c2-ac-worker`
 - **Depuis ce node**, télécharger et exécuter ce script - **ne pas regarder le contenu**
 
 ```shell
