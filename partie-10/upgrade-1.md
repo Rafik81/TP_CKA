@@ -4,8 +4,10 @@
 ## Preparation
 
 ```shell
+# Supprimer les clusters kind existants
+kind delete clusters -A
 
-rm -f cka-upgrade-1.sh
+# Créer le cluster du TP
 wget https://gitlab.enoks.fr/pub/scripts/-/raw/master/scripts/cka-upgrade-1.sh
 bash cka-upgrade-1.sh
 

@@ -3,8 +3,6 @@
 ## Preparation
 
 ```shell
-
-rm -f cka-upgrade-2.sh
 wget https://gitlab.enoks.fr/pub/scripts/-/raw/master/scripts/cka-upgrade-2.sh
 bash cka-upgrade-2.sh
 
