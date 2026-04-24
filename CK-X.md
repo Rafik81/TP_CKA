@@ -11,3 +11,10 @@ curl -fsSL https://raw.githubusercontent.com/nishanb/ck-x/master/scripts/install
 ```
 
 Browser: [http://localhost:30080/](http://localhost:30080/)
+
+## Ménage
+
+```shell
+cd ck-x-simulator
+docker compose down
+```
