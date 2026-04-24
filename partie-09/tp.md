@@ -47,7 +47,7 @@ exit
 ```
 
 - Sortir  du node
-- Vérifier que le node passe en `notReady` après quelques temps
+- Vérifier que le node passe en `notReady` **après quelques temps**
 
 > **Consignes**
   
