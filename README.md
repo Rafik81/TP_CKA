@@ -10,7 +10,7 @@ Il faut patcher le fichier `/etc/containerd/config.toml` afin d'y ajouter un cre
 
 ```shell
 export REGISTRY_USER="zabradocker"
-export REGISTRY_PASS="dckr_pat_xcnAbzdZ523FNwWVLy1Q_owJVR8"
+export REGISTRY_PASS="dckr_pat_8UI3-EtdBMqQ_tuazKeTYclFAL0"
 wget https://gitlab.enoks.fr/pub/scripts/-/raw/master/scripts/patch-cri.sh
 bash patch-cri.sh
 ```
@@ -27,7 +27,7 @@ Insérer ce bloc en bas du fichier
     [plugins."io.containerd.grpc.v1.cri".registry]
         [plugins."io.containerd.grpc.v1.cri".registry.configs."registry-1.docker.io".auth]
             username = "zabradocker"
-            password = "dckr_pat_xcnAbzdZ523FNwWVLy1Q_owJVR8"
+            password = "dckr_pat_8UI3-EtdBMqQ_tuazKeTYclFAL0"
 ```
 
 Ensuite restart **containerd** : `systemctl restart containerd`
