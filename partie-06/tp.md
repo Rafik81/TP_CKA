@@ -125,24 +125,7 @@ Utiliser le contexte: `kubectl config use-context  kind-k8s-no-cni`
 Depuis l'un des node, vérifier que ca fonctionne avec `curl -H 'Host: public-app.cka' http://<IP-INGRESS-CREE>` 
 
 
-## 9. DNS -Service
-
-Utiliser le contexte: `kubectl config use-context  kind-k8s-no-cni`
-
-> **Consignes**
-
-- Créer et utiliser le namespace `dns-test`
-- Créer le pod `dns-web-app` avec `nginx:1.29-alpine`
-
-- Exposer le pod `dns-web-app` avec un service cluserIP `dns-web-svc`, port 80
-  
-- Lancer un pod `dns-wget`avec l'image `busybox:1.36`, il doit rester en running
-- Vérifier que le pod `dns-wget` arrive bien à joindre le service
-  - `wget -qO- http://dns-web-svc`
-  - `wget -qO- http://dns-web-svc.dns-test.svc.cluster.local`
-
-
-## 10. API Gateway
+## 9. API Gateway
 
 - Utiliser le contexte: `kubectl config use-context  kind-k8s-no-cni`
 
@@ -208,3 +191,19 @@ spec:
         path: /
         pathType: Prefix
 ```
+
+## 10. DNS -Service
+
+Utiliser le contexte: `kubectl config use-context  kind-k8s-no-cni`
+
+> **Consignes**
+
+- Créer et utiliser le namespace `dns-test`
+- Créer le pod `dns-web-app` avec `nginx:1.29-alpine`
+
+- Exposer le pod `dns-web-app` avec un service cluserIP `dns-web-svc`, port 80
+  
+- Lancer un pod `dns-wget`avec l'image `busybox:1.36`, il doit rester en running
+- Vérifier que le pod `dns-wget` arrive bien à joindre le service
+  - `wget -qO- http://dns-web-svc`
+  - `wget -qO- http://dns-web-svc.dns-test.svc.cluster.local`
