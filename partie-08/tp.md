@@ -83,7 +83,33 @@ Au niveau du container, veuillez qu'il soit
 - L'escalation de privilege désactivée
 
 
-## 5. NetworkPolicy
+## 5. LimitRange - Quota
+
+Utiliser le contexte `kubectl config use-context kind-k8s-c3-ccc`
+
+> **Consignes**
+
+Dans le namespace `quota-limits`:
+
+- Créer une **LimitRange** `resource-limits` avec:
+  - Default request: CPU: `10m`, Memory: `8Mi`
+  - Default limit: CPU: `20m`, Memory: `128Mi`
+  - Max limit: CPU: `50m`, Memory: `256Mi`
+  
+. Créer une ResourceQuota `compute-quota`avec:
+   - CPU: `2`
+   - Memory: `1Gi`
+   - Limit memory: `2Gi`
+   - Max number of pods: `2`
+  
+- Créer un deployment `test-quota-limit` avec `nginx:1.29-alpine` et **3 replicas**
+
+Vérifier que les limites s'appliquent bien et le quota aussi
+
+Stocker les events du namespace après avoir appliquer une `grep compute-quota` dans `/opt/cka/test-quota.log`
+
+
+## 6. NetworkPolicy
 
 
 Utiliser le contexte: `kubectl config use-context  kind-k8s-no-cni`
@@ -101,7 +127,7 @@ Utiliser le contexte: `kubectl config use-context  kind-k8s-no-cni`
    - Autoriser api à communiquer uniquement avec db
    - Tout le reste du trafic avec les autres pods est bloqué
 
-## 6. NetworkPolicy with port
+## 7. NetworkPolicy with port
 
 
 Utiliser le contexte: `kubectl config use-context kind-k8s-c1-h`
@@ -205,31 +231,6 @@ Vérifier que ces deux pods peuvent joindre le pod `vault`sur le port 8080. En f
 
 - Vérifier que le pod `pod-allow`  a toujours accès et pas le `pod-deny`
 
-
-## 7. LimitRange - Quota
-
-Utiliser le contexte `kubectl config use-context kind-k8s-c3-ccc`
-
-> **Consignes**
-
-Dans le namespace `quota-limits`:
-
-- Créer une **LimitRange** `resource-limits` avec:
-  - Default request: CPU: `10m`, Memory: `8Mi`
-  - Default limit: CPU: `20m`, Memory: `128Mi`
-  - Max limit: CPU: `50m`, Memory: `256Mi`
-  
-. Créer une ResourceQuota `compute-quota`avec:
-   - CPU: `2`
-   - Memory: `1Gi`
-   - Limit memory: `2Gi`
-   - Max number of pods: `2`
-  
-- Créer un deployment `test-quota-limit` avec `nginx:1.29-alpine` et **3 replicas**
-
-Vérifier que les limites s'appliquent bien et le quota aussi
-
-Stocker les events du namespace après avoir appliquer une `grep compute-quota` dans `/opt/cka/test-quota.log`
 
 
 
