@@ -11,7 +11,7 @@ Vous avez accès à **plusieurs clusters** depuis votre terminal principal via l
 
 
 - Ensuite, écrivez une commande pour afficher le contexte actuel (current context) dans `/opt/cka/context_default_kubectl.sh`. La commande doit utiliser `kubectl`.
-- Enfin, écrivez une deuxième commande faisant la même chose dans `/opt/cka/context_default_no_kubectl.sh`, mais sans utiliser kubectl.
+- Enfin, écrivez une deuxième commande faisant la même chose dans `/opt/cka/context_default_no_kubectl.sh`, **mais sans utiliser** `kubectl`
 
 
 ## 2. Collecter les information du Master
@@ -24,9 +24,9 @@ Vous avez accès à **plusieurs clusters** depuis votre terminal principal via l
 Connectez-vous au node `k8s-c1-h-control-plane` au cluster `k8s-c1-h` avec `dssh k8s-c1-h-control-plane`
 
 - vérifiez comment les composants `kubelet`, `kube-apiserver`,  `kube-scheduler`, `kube-controller-manager` et `etcd` sont démarrés/installés
--  Recherchez également le nom de l'application DNS et comment elle est démarrée/installée 
+-  Recherchez également le nom de l'application DNS et comment elle a été démarrée/installée 
   
-**Écrivez** vos réponses ur le Helper dans le fichier `/opt/cka/master-components.txt` comme ceci
+**Écrivez** vos réponses sur le Helper dans le fichier `/opt/cka/master-components.txt` comme ceci
 
 ```shell
 kubelet: [TYPE]
@@ -49,8 +49,8 @@ Les valeurs possibles de `[TYPE`] sont: not-installed, process, static-pod, pod
 Trouvez les informations suivantes concernant le cluster `kind-k8s-c1-h` :
 
 
-1. Combien de nœuds maîtres sont disponibles ?
-2. Combien de nœuds de travail sont disponibles ?
+1. Combien de nodes Master sont disponibles ?
+2. Combien de nodes Worker  sont disponibles ?
 3. Quel est le CIDR du service ?
 4. Quel réseau (ou plugin CNI) est configuré et où se trouve son fichier de configuration ?
 5. Quel suffixe auront les pods statiques qui s'exécutent sur `k8s-c1-h-worker`?
