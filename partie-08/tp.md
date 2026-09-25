@@ -116,18 +116,33 @@ Utiliser le contexte: `kubectl config use-context  kind-k8s-no-cni`
 
 > **Consignes**
 
-- Créer et utiliser le namespace `cka-netpol`
+- Créer et utiliser le namespace `cka-netpol` : `kubectl create ns cka-netpol`
+
+- Créer les deployments   `web` (label `app=web` ), `api` (label `app=api`) et `db` (label `app=db`) comme suit:
+
+```shell
+# namespace
+kubectl create cka-netpol 
+
+# web
+kubectl -n cka-netpol create deploy web --image=nginx:1.29-alpine
+
+# api
+kubectl -n cka-netpol create deploy api --image=nginx:1.29-alpine
+
+# db
+kubectl -n cka-netpol create deploy db --image=postgres:13.22-alpine
+kubectl -n cka-netpol set env  deploy/db POSTGRES_HOST_AUTH_METHOD=trust
+```
   
-- Créer un  deployment nommé `web` avec `nginx:1.29-alpine` et le label `app=web`
-- Créer un  deployment nommé `api` avec `nginx:1.29-alpine` et le label `app=api`
-- Créer un  deployment nommé `db` avec `postgres:13.22-alpine`, le label `app=db` et la variable environment `POSTGRES_HOST_AUTH_METHOD=trust`
 
 - Créer des  **NetworkPolicies** pour: (au moins 3)
    - Autoriser web à communiquer uniquement avec api
    - Autoriser api à communiquer uniquement avec db
    - Tout le reste du trafic avec les autres pods est bloqué
 
-## 7. NetworkPolicy with port
+
+## 7. NetworkPolicy Pith Port
 
 
 Utiliser le contexte: `kubectl config use-context kind-k8s-c1-h`
@@ -137,6 +152,7 @@ Utiliser le contexte: `kubectl config use-context kind-k8s-c1-h`
 - Créer et utiliser le namespace `project-snake`
  
 - Créer un  pod nommé `db1` avec `postgres:13.22-alpine`, le label `run=db1` , container port 1111 et la variable environment `POSTGRES_HOST_AUTH_METHOD=trust`
+  
 - Créer un  pod nommé `db2` avec `postgres:13.22-alpine`, le label `run=db2` , container port 2222 et la variable environment `POSTGRES_HOST_AUTH_METHOD=trust`
   
 - Créer ce StatefulSet avec cette commande et vérifier que les pods sont en Running
